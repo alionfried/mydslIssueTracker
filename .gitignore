@@ -1,0 +1,7 @@
+#ignores the following files
+.DS_Store
+**/bin
+bin
+#**/src-gen/**
+**/xtend-gen/**
+!**/.gitignore
