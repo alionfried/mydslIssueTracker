@@ -60,7 +60,7 @@
 		</nav>
 	</header>
 
-	<body role="document">
+	<body id="issueBody" role="document">
 	  
 		<div class="container theme-showcase" role="main">			
 			
@@ -131,11 +131,11 @@
 					<div class="modal-body">
 						Here you choose the Issuetype you want to create.
 						<div class="dropdown">
-							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<button id="btnList" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								Select Issuetype
 								<span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<ul id="btnListCreateIssues" class="dropdown-menu" aria-labelledby="dropdownMenu1">
 								<li><a href="#">Ticket</a></li>
 								<li><a href="#">Story</a></li>
 								<li><a href="#">Change</a></li>				
@@ -143,11 +143,12 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Create Issue</button>
+						<button id="closeCreateIssue" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<!--Don't need <button type="button" class="btn btn-primary">Create Issue</button>-->
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>		
+		<script src="issuetracker.js"></script>
 	</body>
 </html>
