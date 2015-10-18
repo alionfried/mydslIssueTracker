@@ -1,0 +1,83 @@
+Status offen 
+Status inBearbeitung 
+Status zuTesten 
+Status abgenommen 
+Status abgeschlossen 
+Status zurueckgezogen
+
+Transition offen_inBearbeitung named "in Bearbeitung nehmen" { 
+	offen to inBearbeitung
+}
+
+Transition offen_zurueckgezogen named "zurückziehen" { 
+	offen to zurueckgezogen
+} 
+Transition inBearbeitung_zuTesten named "zu testen geben" { 
+	inBearbeitung to zuTesten
+} 
+Transition inBearbeitung_zurueckgezogen named "zurückziehen" { 
+	inBearbeitung to zurueckgezogen
+} 
+Transition zuTesten_abgenommen named "abnehmen" { 
+	zuTesten to abgenommen
+} 
+Transition abgenommen_abgeschlossen named "abschliessen" { 
+	abgenommen to abgeschlossen
+} 
+Transition zuTesten_abgeschlossen named "abschliessen" { 
+	zuTesten to abgeschlossen
+} 
+Transition zuTesten_inBearbeitung named "in Bearbeitung geben" { 
+	zuTesten to inBearbeitung
+}
+
+Transition inBearbeitung_abgeschlossen named "abschliessen" { 
+	inBearbeitung to abgeschlossen
+}
+
+Workflow work2 { 
+	offen_zurueckgezogen
+}
+
+Workflow workflowKurz { 
+	offen_inBearbeitung 
+	offen_zurueckgezogen 
+	inBearbeitung_zuTesten 
+	inBearbeitung_zurueckgezogen 
+	zuTesten_inBearbeitung 
+	zuTesten_abgeschlossen
+}
+
+Workflow workflowLang { 
+	offen_inBearbeitung 
+	offen_zurueckgezogen 
+	inBearbeitung_zuTesten 
+	inBearbeitung_zurueckgezogen 
+	zuTesten_inBearbeitung 
+	zuTesten_abgenommen 
+	abgenommen_abgeschlossen
+}
+
+IssueType bug follows workflowKurz 
+IssueType issue follows workflowLang
+
+Person jason {
+
+}
+
+Issue bug1 of bug { 
+	status offen 
+	from jason 
+	"Wir haben einen grossen Fehler. Dieser ist zu beheben. Lirum larum, das war die aussagekräftige Fehlerbeschreibung."
+}
+
+Issue bug2 of bug { 
+	status offen 
+	"Wir haben einen noch viel groesseren Fehler. Oh NEIN!"
+}
+
+Issue issue1 of issue { 
+	status offen 
+	from jason 
+	"Software für Ueberpruefungsfall in Dieselmotor einbauen."
+}
