@@ -7,7 +7,7 @@ public class FileServer {
 	public static void main(String[] args) throws Exception {
 		Server server = new Server(8080);
 
-		ResourceHandler resource_handler = new ResourceHandler();
+		ResourceHandler resource_handler = new ResourceHandler(); 
 
 		resource_handler.setDirectoriesListed(true);
 		resource_handler.setWelcomeFiles(new String[] { "issuetracker.html" });

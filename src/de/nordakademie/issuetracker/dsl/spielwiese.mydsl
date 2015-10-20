@@ -36,7 +36,7 @@ Transition inBearbeitung_abgeschlossen named "abschliessen" {
 }
 
 Workflow work2 { 
-	offen_zurueckgezogen
+	offen_zurueckgezogen 
 }
 
 Workflow workflowKurz { 

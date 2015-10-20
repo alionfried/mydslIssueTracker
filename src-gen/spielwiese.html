@@ -1,19 +1,128 @@
-<!DOCTYPE html>
-<head>
-	<html lang="en">
-	<title>Issue Tracker</title>
-	<meta charset="utf-8">
-</head>	
-<header style="color:white;background-color:#444;margin-bottom:5px;">
-		<button>New Issue</button>			
-		<input type="search" placeholder="search"></input>
-		<select>
-			<option value="user1">User1</option>
-			<option value="user2">User2</option>				
-		</select>
-</header>		
-<Body style="font-family:Verdana,sans-serif;font-size:0.8em;background-color:#E0E0FF;">
-	<p>Issue Content</p>		
-</Body>
+	<!DOCTYPE html>
+<html lang="en">
+  <head>	
+    <meta charset="utf-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Issue Tracker</title>
+	<meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+	
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>				    
+      
+  </head>
+	
+	<body id="issueBody" role="document">
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a id="aShow" class="navbar-brand" href="#">Issue Tracker</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a id="btnCreateNewIssue" data-toggle="modal" data-target="#ChooseIssueType">Create New Issue</a></li>
+                            <li>
+                                <form class="navbar-form navbar-left" role="search">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Search Issues</button>
+                                </form>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Assignee<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Person 1</a></li>
+                                    <li><a href="#">Person 2</a></li>
+                                    <li><a href="#">Person 3</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+        </header>
+
+		<div id="mainDiv" class="container theme-showcase" role="main">			
+			
+		  <!-- Main jumbotron for a primary marketing message or call to action -->
+			<div class="jumbotron">
+				<h1>Issue Tracker Information</h1>
+				<p>The issue tracker start page. You can see a ticket overview.</p>
+			</div>				
+            <div id="issueOverview">
+                <div class="page-header">
+                    <h1>Issue Overview</h1>
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    <strong id="strong">Warning! Has to create automaticlly.</strong>
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Assignee</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Alfred Otto</td>
+                                <td>Problem with log in</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Jacob Thom</td>
+                                <td>Problem with reomte control</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Larry Greeds</td>
+                                <td>forgot password for sap</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>				
+            <div id="optionCreateNewIssue" class="modal-body">
+                Here you choose the Issuetype you want to create.<br />
+                <select id="btnListCreateIssues" class="selectpicker">
+                    <option value="Ticket">Ticket</option>
+                    <option value="Story">Story</option>
+                    <option value="Change">Change</option>
+                </select>
+                <button type="button" class="btn btn-primary">Create</button>				
+            </div>			
+		</div>	    
+	
+		
+        <div id="secondDiv" class="container theme-showcase" role="main">
+            <button id="btnHide" type="button" class="btn btn-default">Hide</button>
+            <br />
+            <button id="btnShow" type="button" class="btn btn-default">Show</button>
+        </div>
+            <script src="issuetracker.js"></script>
+</body>
+</html>
+	
+	
