@@ -6,7 +6,7 @@ Status abgeschlossen
 Status zurueckgezogen
 
 Transition offen_inBearbeitung named "in Bearbeitung nehmen" { 
-	offen to inBearbeitung
+	offen to inBearbeitung 
 } 
 
 Transition offen_zurueckgezogen named "zurückziehen" { 
