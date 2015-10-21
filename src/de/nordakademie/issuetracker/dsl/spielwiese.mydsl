@@ -6,9 +6,9 @@ Status abgeschlossen
 Status zurueckgezogen
 
 Transition offen_inBearbeitung named "in Bearbeitung nehmen" { 
-	offen to inBearbeitung 
-} 
-
+	offen to inBearbeitung
+}
+ 
 Transition offen_zurueckgezogen named "zurückziehen" { 
 	offen to zurueckgezogen
 } 
@@ -36,7 +36,7 @@ Transition inBearbeitung_abgeschlossen named "abschliessen" {
 }
 
 Workflow work2 { 
-	offen_zurueckgezogen 
+	offen_zurueckgezogen
 }
 
 Workflow workflowKurz { 
@@ -58,8 +58,24 @@ Workflow workflowLang {
 	abgenommen_abgeschlossen
 }
 
-IssueType bug follows workflowKurz 
-IssueType issue follows workflowLang
+IssueType bug follows workflowKurz {
+	Date start { 10.12.1999 }
+	Combo auswahl { 
+		entries { "a" "b" "c" } 
+		index 3
+	}
+	Check bool {
+		"benötigt"
+		 
+	}
+	Check bool2 {
+		"auch benötigt"
+		x 
+	}
+}
+IssueType issue follows workflowLang {
+	
+}
 
 Person jason {
 
