@@ -7,7 +7,7 @@ Status zurueckgezogen
 
 Transition offen_inBearbeitung named "in Bearbeitung nehmen" { 
 	offen to inBearbeitung
-}
+} 
 
 Transition offen_zurueckgezogen named "zurückziehen" { 
 	offen to zurueckgezogen
