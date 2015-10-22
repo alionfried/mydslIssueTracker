@@ -77,13 +77,26 @@ IssueType issue follows workflowLang {
 	
 }
 
+DateField testDate as "Beginndat" {
+	default 17.11.2000 
+}
+
+ComboField comboID as "unfassbar" {
+	default { "Default" "zweiter Eintrag"}
+}
+
+CheckField checkID as "dringend" {
+	default FALSE
+}
+
 Person jason {
 	
 }
 IssueScreen id {
-//	StatusField stat {
-//	}
-//	Summary qwser {
-//		default"Default"
-//	}
+	StatusField statusField {
+		default abgenommen
+	}
+	SummaryField qwser {
+		default"Default"
+	}
 }
