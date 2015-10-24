@@ -76,7 +76,7 @@ IssueType bug follows workflowKurz {
 IssueType issue follows workflowLang {
 	
 }
-  
+//hier ist was kaputt 
 DateField testDate as "Beginndat" {
 	default 17.11.2000 
 }
