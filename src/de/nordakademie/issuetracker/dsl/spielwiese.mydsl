@@ -8,7 +8,7 @@ Status zurueckgezogen
 Transition offen_inBearbeitung named "in Bearbeitung nehmen" { 
 	offen to inBearbeitung
 }
- 
+
 Transition offen_zurueckgezogen named "zurückziehen" { 
 	offen to zurueckgezogen
 } 
@@ -76,7 +76,7 @@ IssueType bug follows workflowKurz {
 IssueType issue follows workflowLang {
 	
 }
-
+  
 DateField testDate as "Beginndat" {
 	default 17.11.2000 
 }
