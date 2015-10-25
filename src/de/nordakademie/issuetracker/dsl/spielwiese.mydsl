@@ -35,10 +35,6 @@ Transition inBearbeitung_abgeschlossen named "abschliessen" {
 	inBearbeitung to abgeschlossen
 }
 
-Workflow work2 { 
-	offen_zurueckgezogen
-}
-
 Workflow workflowKurz { 
 	offen_inBearbeitung 
 	offen_zurueckgezogen 
@@ -58,45 +54,93 @@ Workflow workflowLang {
 	abgenommen_abgeschlossen
 }
 
-IssueType bug follows workflowKurz {
-//	Date start as "Beginndatum" { 
-//		
-//	}
-//	Combo auswahl as "Combofeld"{ 
-//		default entries { "Entries" "Entrie2" }
-//	}
-//	String string1 as "Textfeld" {
-//		"bär" 
-//	}
-//	Check bool2 {
-//		"auch benötigt"
-//		x 
-//	}
-}
-IssueType issue follows workflowLang {
-	
-}
-//hier ist was kaputt 
-DateField testDate as "Beginndat" {
-	default 17.11.2000 
+DateField beginnDatum as "Beginndatum" {
+	default today
 }
 
-ComboField comboID as "unfassbar" {
-	default { "Default" "zweiter Eintrag"}
+DateField endeDatum as "Enddatum" {
+	default today //--> prüfen, DAtum funktioniert nicht mehr
 }
 
-CheckField checkID as "dringend" {
+MailField kontakt as "Kontaktmail" {
+	default asd@traum.de
+}
+
+ComboField prio as "Priorität" {
+	default { "hoch" "mittel" "gering"}
+}
+
+CheckField checkBetriebsrat as "Betriebsrat" {
 	default FALSE
 }
 
-Person jason {
-	
+PersonField assignee as 'Bearbeiter' {
 }
-IssueScreen id {
+
+Role tester {
+	zuTesten_abgenommen
+	zuTesten_abgeschlossen
+	zuTesten_inBearbeitung
+}
+
+Role bearbeiter {
+	offen_inBearbeitung
+	inBearbeitung_zuTesten
+	zuTesten_inBearbeitung
+}
+
+Role anforderer {
+	inBearbeitung_zurueckgezogen
+	offen_zurueckgezogen
+	create Issue	
+}
+
+Role admin {
+	abgenommen_abgeschlossen
+	inBearbeitung_abgeschlossen
+	inBearbeitung_zurueckgezogen
+	inBearbeitung_zuTesten
+	offen_inBearbeitung
+	offen_zurueckgezogen
+	zuTesten_abgenommen
+	zuTesten_abgeschlossen
+	zuTesten_inBearbeitung	
+}
+
+Person P000123 called "Johnnie"{
+	anforderer
+}
+
+Person P009876 called "Jim"{
+	bearbeiter
+}
+
+Person P994466 called "Jack" {
+	tester	
+}
+
+Person L000043 called "Admin"{
+	admin
+}
+
+
+IssueType bug follows workflowKurz {
+	prio
+}
+
+IssueType issue follows workflowLang {
+	endeDatum
+	checkBetriebsrat
+}
+
+IssueScreen issueScreen {
 	StatusField statusField {
-		default abgenommen
+		default offen
 	}
-	SummaryField qwser {
-		default"Default"
+	
+	SummaryField beschreibung {
 	}
+	
+	beginnDatum
+	assignee	
 }
