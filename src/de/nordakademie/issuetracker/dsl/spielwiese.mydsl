@@ -11,7 +11,7 @@ Transition offen_inBearbeitung named "in Bearbeitung nehmen" {
 
 Transition offen_zurueckgezogen named "zurückziehen" { 
 	offen to zurueckgezogen
-}
+} 
 Transition inBearbeitung_zuTesten named "zu testen geben" { 
 	inBearbeitung to zuTesten
 } 
