@@ -59,11 +59,11 @@ DateField beginnDatum as "Beginndatum" {
 }
 
 DateField endeDatum as "Enddatum" {
-	default today //--> prüfen, DAtum funktioniert nicht mehr
+	default 31 . 12 . 9999 //--> seit Terminals erwartet er Leerzeichen vor und nach '.' -> habe Jan ne Mail geschrieben
 }
 
 MailField kontakt as "Kontaktmail" {
-	default asd@traum.de
+	default barbapapa4@TRAUM.De 
 }
 
 ComboField prio as "Priorität" {
@@ -116,6 +116,7 @@ Person P009876 called "Jim"{
 }
 
 Person P994466 called "Jack" {
+	anforderer
 	tester	
 }
 
@@ -142,5 +143,5 @@ IssueScreen issueScreen {
 	}
 	
 	beginnDatum
-	assignee	
+	assignee
 }
