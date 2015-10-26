@@ -1,4 +1,4 @@
-//Status für aDIV
+//Status fï¿½r aDIV
 // 1 := onLoad / Ready  (Seite fertig gealden / Button Issue...
 // 2 := optionCreateNewIssue
 // 3 := btnHide
