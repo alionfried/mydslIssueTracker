@@ -55,7 +55,7 @@ $("#aShow").click(function () {
 });
 
 $("#btnCreateNewIssue").click(function () {
-    einAusblendenDIV(2, 3000);
+    $(".jumbotron").load("test.html");
 });
 
 $(function () {

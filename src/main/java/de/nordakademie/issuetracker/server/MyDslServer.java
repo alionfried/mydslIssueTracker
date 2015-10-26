@@ -17,6 +17,10 @@ public class MyDslServer {
 			return loadFile("/html/issuetracker.html");
 		});
 		
+		get("/blah", (req, res) -> {
+			return "huhu";
+		});
+		
 		post("/issues", (req, res) -> {
 			MultiMap<String> formData = new MultiMap<String>();
 			UrlEncoded.decodeTo(req.body(), formData, "UTF-8");
