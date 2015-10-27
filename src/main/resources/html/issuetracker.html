@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>	
     <meta charset="utf-8">    
@@ -49,16 +49,20 @@
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Assignee<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
+                                <ul id="personList" class="dropdown-menu">
                                     <li><a href="#">Person 1</a></li>
                                     <li><a href="#">Person 2</a></li>
                                     <li><a href="#">Person 3</a></li>
                                 </ul>
                             </li>
                         </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="navRigth">Singed in with Person:</a></li>                                                        
+                        </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </nav>
+            
         </header>
 
 		<div id="mainDiv" class="container theme-showcase" role="main">			
@@ -110,16 +114,14 @@
                     <option value="Ticket">Ticket</option>
                     <option value="Story">Story</option>
                     <option value="Change">Change</option>
-                </select>
-                <button type="button" class="btn btn-primary">Create</button>				
+                </select>                
             </div>			
 		</div>	    
-	
+		<div id="changeIssueDiv" class="container theme-showcase" role="main">
+		</div>
 		
         <div id="secondDiv" class="container theme-showcase" role="main">
-            <button id="btnHide" type="button" class="btn btn-default">Hide</button>
-            <br />
-            <button id="btnShow" type="button" class="btn btn-default">Show</button>
+            <button id="btnCreateIssue" type="button" class="btn btn-primary">Create</button>				
         </div>
             <script src="issuetracker.js"></script>
 </body>

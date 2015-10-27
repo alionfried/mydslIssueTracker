@@ -1,4 +1,4 @@
-//Status f�r aDIV
+//Status für aDIV
 // 1 := onLoad / Ready  (Seite fertig gealden / Button Issue...
 // 2 := optionCreateNewIssue
 // 3 := btnHide
@@ -7,7 +7,8 @@
 var aDiv = [
   ['mainDiv'             , true, true, false,true],
   ['issueOverview'       , true, false, false,true],
-  ['optionCreateNewIssue', false, true, false,true]
+  ['optionCreateNewIssue', false, true, false, false],
+  ['secondDiv'           , false, true, false, false]
 ];
 
 function einAusblendenDIV(nStatus, nTime) {
@@ -19,7 +20,12 @@ function einAusblendenDIV(nStatus, nTime) {
             $(tmpDiv).hide(nTime);
         }
     }
+}
 
+//Hier muss mit der Datenbank gearbeitet werden
+function checkpermission(personname) {
+    //String Name der Person erhalten und dann über Datenbank abfragen, ob die Aktion durchgeführt werden darf
+    return true;
 }
 
 //$('#btnListCreateIssues').click(function(){
@@ -36,7 +42,14 @@ $(".selectpicker").change(function () {
 });
 
 function selectedItem() {
-    var sReturn = this.options(this.selectedIndex).value;
+    //var sReturn = this.options(this.selectedIndex).value;
+    var sReturn = $(".selectpicker").change(function () {
+
+        var sReturn = this.options(this.selectedIndex).value;
+
+        alert(sReturn);
+
+    });
 
     alert(sReturn);
 
@@ -55,7 +68,47 @@ $("#aShow").click(function () {
 });
 
 $("#btnCreateNewIssue").click(function () {
-    $(".jumbotron").load("test.html");
+    einAusblendenDIV(2, 3000);
+});
+
+$("#btnCreateIssue").click(function () {    
+    getReturn = (checkpermission("alli"));
+    var sReturn;
+    //selectedItem();
+    //$("#optionCreateNewIssue option").each(function () {
+        sReturn = $("#optionCreateNewIssue option");//$(this).options($(this).selectedIndex).value;
+        //var abc = sReturn.options(sReturn.selectedIndex).value;
+        var length = sReturn.length;
+        var selectedObject;
+        var isSelected = false;
+
+        var returnObjekt;
+        var i = 0;
+        while (isSelected == false && i < length) {
+            //for (var i = 0; i < length; i++) {
+                if (sReturn[i].selected == true) {
+                    isSelected = true;
+                    returnObjekt = sReturn[i];
+                }
+                i++;
+            //}
+        }
+        selectedObject = returnObjekt.value;
+        alert(selectedObject);        
+        
+    //});
+
+    if (getReturn == true) {
+        alert(getReturn);
+    }
+    else {
+        alert("Sie haben nicht die Berechtigung diese Aktion durchzufuehren.");
+    }
+});
+
+$("#btnCreateIssue").click(function () {
+	$("#changeIssueDiv").load("test.html #change");
+	
 });
 
 $(function () {
