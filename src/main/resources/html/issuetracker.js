@@ -8,7 +8,8 @@ var aDiv = [
   ['mainDiv'             , true, true, false,true],
   ['issueOverview'       , true, false, false,true],
   ['optionCreateNewIssue', false, true, false, false],
-  ['secondDiv'           , false, true, false, false]
+  ['secondDiv'           , false, true, false, false],
+  ['changeIssueDiv'		 , true, true, false, false]
 ];
 
 function einAusblendenDIV(nStatus, nTime) {
