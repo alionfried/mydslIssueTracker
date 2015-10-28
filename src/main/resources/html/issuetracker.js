@@ -112,6 +112,12 @@ $("#btnCreateIssue").click(function () {
 	
 });
 
+$("#btnCreateIssue").click(function () {
+	$("#standardInputDiv").load("standardInput.html");
+	
+});
+
+
 $(function () {
     einAusblendenDIV(1,10);
 });
