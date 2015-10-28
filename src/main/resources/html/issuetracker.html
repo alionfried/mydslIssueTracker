@@ -48,12 +48,7 @@
                                 </form>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Assignee<span class="caret"></span></a>
-                                <ul id="personList" class="dropdown-menu">
-                                    <li><a href="#">Person 1</a></li>
-                                    <li><a href="#">Person 2</a></li>
-                                    <li><a href="#">Person 3</a></li>
-                                </ul>
+                                <a id="btnChangeAssignee" data-toggle="modal" data-target="#ChooseAssignee">Assignee</a>                                                                 
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -109,25 +104,37 @@
                 </div>
             </div>				
             <div id="optionCreateNewIssue" class="modal-body">
+                <!--<input name="vorname" id="vorname" type="text" placeholder="Mein Vorname" required /><br />
+                <input name="email" id="email" type="email" placeholder="Vorn.Nachn@irgendwo.com" required /><br />-->
                 Here you choose the Issuetype you want to create.<br />
                 <select id="btnListCreateIssues" class="selectpicker">
                     <option value="Ticket">Ticket</option>
                     <option value="Story">Story</option>
                     <option value="Change">Change</option>
                 </select>                
-            </div>			
-		</div>
-		<div id="standardInputDiv" class="container theme-showcase" role="main">
-			
-		</div>	    
+            </div>
+            <div id="secondDiv" class="container theme-showcase" role="main">
+                <button id="btnCreateIssue" type="button" class="btn btn-primary">Create</button>
+                <button id="subCreateIssue" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div id="optionChangeAssignee" class="modal-body">
+                Here you change the role/person.<br />
+                <select id="btnSelectChangeAssignee" class="selectpicker">                    
+                    <option value="Person1">Person 1</option>
+                    <option value="Person2">Person 2</option>
+                    <option value="Person3">Person 3</option>
+                </select>
+            </div>
+        </div>	    
+        <div id="standardInputDiv" class="container theme-showcase" role="main">
+
+        </div>	 
 		<!-- In diesem Div wird der benoetige Issue bereitgestellt -->
 		<div id="changeIssueDiv" class="container theme-showcase" role="main">
 		
 		</div>
 		
-        <div id="secondDiv" class="container theme-showcase" role="main">
-            <button id="btnCreateIssue" type="button" class="btn btn-primary">Create</button>				
-        </div>
+        
             <script src="issuetracker.js"></script>
 </body>
 </html>

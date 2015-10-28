@@ -1,15 +1,16 @@
 //Status für aDIV
 // 1 := onLoad / Ready  (Seite fertig gealden / Button Issue...
 // 2 := optionCreateNewIssue
-// 3 := btnHide
+// 3 := btnChangeAssignee
 // 4 := btnShow
 
 var aDiv = [
-  ['mainDiv'             , true, true, false,true],
+  ['mainDiv'             , true, true, true,true],
   ['issueOverview'       , true, false, false,true],
   ['optionCreateNewIssue', false, true, false, false],
   ['secondDiv'           , false, true, false, false],
-  ['changeIssueDiv'		 , true, true, false, false]
+  ['changeIssueDiv'      , false, true, false, false],
+  ['optionChangeAssignee', false, false, true, false]
 ];
 
 function einAusblendenDIV(nStatus, nTime) {
@@ -34,12 +35,9 @@ function checkpermission(personname) {
 //    alert(sReturn);
 //});
 
-$(".selectpicker").change(function () {
-
+$('#btnSelectChangeAssignee').change(function(){
     var sReturn = this.options(this.selectedIndex).value;
-
-    alert(sReturn);
-
+    $("#navRigth").text("Signed in as: " + sReturn);
 });
 
 function selectedItem() {
@@ -112,12 +110,36 @@ $("#btnCreateIssue").click(function () {
 	
 });
 
-$("#btnCreateIssue").click(function () {
-	$("#standardInputDiv").load("standardInput.html");
-	
+$('#btnChangeAssignee').click(function () {
+    einAusblendenDIV(3, 10);
 });
 
+$("#btnCreateIssue").click(function () {
+    $("#standardInputDiv").load("standardInput.html");
+
+});
 
 $(function () {
-    einAusblendenDIV(1,10);
+    einAusblendenDIV(1, 10);
+
+    var sReturn = $("#optionChangeAssignee option");//$(this).options($(this).selectedIndex).value;
+    //var abc = sReturn.options(sReturn.selectedIndex).value;
+    var length = sReturn.length;
+    var selectedObject;
+    var isSelected = false;
+
+    var returnObjekt;
+    var i = 0;
+    while (isSelected == false && i < length) {
+        //for (var i = 0; i < length; i++) {
+        if (sReturn[i].selected == true) {
+            isSelected = true;
+            returnObjekt = sReturn[i];
+        }
+        i++;
+        //}
+    }
+    selectedObject = returnObjekt.value;
+
+    $("#navRigth").text("Signed in as: " + selectedObject);
 });
