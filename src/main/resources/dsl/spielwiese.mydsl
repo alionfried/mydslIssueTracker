@@ -70,6 +70,8 @@ ComboField prio as "Priorität" {
 	default { "hoch" "mittel" "gering"}
 }
 
+StringField field as "test" {default "Default" }
+
 CheckField checkBetriebsrat as "Betriebsrat" {
 	default FALSE
 }
