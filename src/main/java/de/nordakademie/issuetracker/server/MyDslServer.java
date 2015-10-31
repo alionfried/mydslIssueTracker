@@ -19,8 +19,16 @@ public class MyDslServer {
 		
 		get("/getIssuetypes", (req, res) -> {
 			res.type("application/json");
-			return "{\"issueTypes\":{ 	\"bug\":{},	\"story\":{},	\"task\":{}	}}";
-		});
+			return "{\"issueTypes\":[{"
+			+	"\"typename\":\"bug\""			
+			+	"},"
+			+	"{"
+			+	"\"typename\":\"story\""			
+			+	"},"
+			+	"{"
+			+	"\"typename\":\"task\""			
+			+	"}]"
+			+"}";});		
 		
 		get("/getPersons", (req, res) -> {
 			res.type("application/json");
