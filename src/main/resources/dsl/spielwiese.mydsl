@@ -138,7 +138,7 @@ IssueScreen issueScreen {
 	StatusField statusField {
 		default offen
 	}
-	
+
 	SummaryField beschreibung {
 	}
 	
