@@ -69,9 +69,10 @@ $("#aShow").click(function () {
 $("#btnCreateNewIssue").click(function () {
     einAusblendenDIV(2, 3000);
         alert("abc");
-	
-	
-    
+	$.get( "http://localhost:4567/getIssuetypes", function( data ) {
+  	alert( "Data Loaded: " + data );
+	});
+	var persons = JSON.parse(data);   
 });
 
 $("#btnCreateIssue").click(function () {    
