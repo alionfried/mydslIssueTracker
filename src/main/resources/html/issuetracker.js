@@ -72,7 +72,8 @@ $("#btnCreateNewIssue").click(function () {
 	$.get( "http://localhost:4567/getIssuetypes", function( data ) {
   	alert( "Data Loaded: " + data );
 	});
-	var persons = JSON.parse(data);   
+	var persons = JSON.parse(data);
+	alert(persons);   
 });
 
 $("#btnCreateIssue").click(function () {    
