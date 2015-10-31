@@ -71,7 +71,7 @@ $("#btnCreateNewIssue").click(function () {
         alert("abc");
 	$.get( "http://localhost:4567/getIssuetypes", function( data ) {
   	alert( "Data Loaded: " + data );
-  	var issueTypes = data.issueTypes;  
+  	var issueTypes = data.issueTypes;
 	});
 	
 });
