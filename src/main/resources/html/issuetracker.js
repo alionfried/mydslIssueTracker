@@ -68,10 +68,14 @@ $("#aShow").click(function () {
 
 $("#btnCreateNewIssue").click(function () {
     einAusblendenDIV(2, 3000);
+        alert("abc");
+
+    
 });
 
 $("#btnCreateIssue").click(function () {    
     getReturn = (checkpermission("alli"));
+    
     var sReturn;
     //selectedItem();
     //$("#optionCreateNewIssue option").each(function () {
@@ -120,7 +124,7 @@ $("#btnCreateIssue").click(function () {
 });
 
 $(function () {
-    einAusblendenDIV(1, 10);
+    einAusblendenDIV(1, 10);	
 
     var sReturn = $("#optionChangeAssignee option");//$(this).options($(this).selectedIndex).value;
     //var abc = sReturn.options(sReturn.selectedIndex).value;

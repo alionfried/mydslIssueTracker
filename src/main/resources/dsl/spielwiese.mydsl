@@ -70,13 +70,19 @@ ComboField prio as "Priorität" {
 	default { "hoch" "mittel" "gering"}
 }
 
-StringField field as "test" {default "Default" }
+StringField field as "test" {
+	default "Default"	
+}
+StringField field as "test" {	
+}
+
 
 CheckField checkBetriebsrat as "Betriebsrat" {
 	default FALSE
 }
 
-PersonField assignee as 'Bearbeiter' {
+PersonField assignee as 'Bearbeiter' {	
+	default L000043
 }
 
 Role tester {
