@@ -17,10 +17,24 @@ public class MyDslServer {
 			return loadFile("/html/issuetracker.html");
 		});
 		
-		get("/blah", (req, res) -> {
-			return "huhu";
+		get("/getIssuetypes", (req, res) -> {
+			res.type("application/json");
+			return "{\"issueTypes\":{ 	\"bug\":{},	\"story\":{},	\"task\":{}	}}";
 		});
 		
+		get("/getPersons", (req, res) -> {
+			res.type("application/json");
+			return "{\"persons\":[{"
+					+	"\"forename\":\"Hans\","
+					+	" \"surname\":\"Maiser\","
+					+	" \"role\":\"admin\""
+					+	"},"
+					+	"{"
+					+	"\"forename\":\"Maik\","
+					+	"\"surname\":\"Muster\","
+					+ 	"\"role\":\"developer\""
+					+	"}]"
+					+"}";});
 		post("/issues", (req, res) -> {
 			MultiMap<String> formData = new MultiMap<String>();
 			UrlEncoded.decodeTo(req.body(), formData, "UTF-8");
