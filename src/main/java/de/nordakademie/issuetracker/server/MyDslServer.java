@@ -33,12 +33,12 @@ public class MyDslServer {
 		get("/getPersons", (req, res) -> {
 			res.type("application/json");
 			return "{\"persons\":[{"
-					+	"\"forename\":\"Hans\","
+					+	"\"id\":\"P009876\","
 					+	" \"surname\":\"Maiser\","
 					+	" \"role\":\"admin\""
 					+	"},"
 					+	"{"
-					+	"\"forename\":\"Maik\","
+					+	"\"id\":\"P994466\","
 					+	"\"surname\":\"Muster\","
 					+ 	"\"role\":\"developer\""
 					+	"}]"

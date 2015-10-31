@@ -37,7 +37,7 @@ function checkpermission(personname) {
 
 $('#btnSelectChangeAssignee').change(function(){
     var sReturn = this.options(this.selectedIndex).value;
-    $("#navRigth").text("Signed in as: " + sReturn);
+    $("#navRigth").text(sReturn);
 });
 
 function selectedItem() {
@@ -67,14 +67,7 @@ $("#aShow").click(function () {
 });
 
 $("#btnCreateNewIssue").click(function () {
-    einAusblendenDIV(2, 3000);
-        alert("abc");
-	$.get( "http://localhost:4567/getIssuetypes", function( data ) {
-  	alert( "Data Loaded: " + data );
-  	var issueTypes = data.issueTypes.length;
-  	alert(issueTypes);
-	});
-	
+    einAusblendenDIV(2, 3000);    	
 });
 
 $("#btnCreateIssue").click(function () {    
@@ -87,7 +80,7 @@ $("#btnCreateIssue").click(function () {
         //var abc = sReturn.options(sReturn.selectedIndex).value;
         var length = sReturn.length;
         var selectedObject;
-        var isSelected = false;
+        var isSelected = false;        
 
         var returnObjekt;
         var i = 0;
@@ -127,10 +120,16 @@ $("#btnCreateIssue").click(function () {
 
 });
 
-$(function () {
-    einAusblendenDIV(1, 10);
-
-    var sReturn = $("#optionChangeAssignee option");//$(this).options($(this).selectedIndex).value;
+function addPersons(){
+	//add persons    
+    $.get( "http://localhost:4567/getPersons", function( data ) {
+    var persons = data.persons;
+    for (var i = 0; i < persons.length; i++) {
+    	var personid = persons[i].id;
+    	var myOpt = '<option value=' + personid + ' >' + personid + '</option>';    	
+		$("#btnSelectChangeAssignee").append(myOpt);	
+    }
+        var sReturn = $("#optionChangeAssignee option");//$(this).options($(this).selectedIndex).value;
     //var abc = sReturn.options(sReturn.selectedIndex).value;
     var length = sReturn.length;
     var selectedObject;
@@ -149,5 +148,24 @@ $(function () {
     }
     selectedObject = returnObjekt.value;
 
-    $("#navRigth").text("Signed in as: " + selectedObject);
+    $("#navRigth").text(selectedObject);
+    });
+}
+
+$(function () {
+    einAusblendenDIV(1, 10);
+    
+    //add issuetypes
+    $.get( "http://localhost:4567/getIssuetypes", function( data ) {
+    var issues = data.issueTypes;
+    for (var i = 0; i < issues.length; i++) {
+    	var issuename = issues[i].typename;
+    	var myOpt = '<option value=' + issuename + ' >' + issuename + '</option>';    	
+		$("#btnListCreateIssues").append(myOpt);	
+    }
+    });    
+
+	addPersons();
+	
+
 });
