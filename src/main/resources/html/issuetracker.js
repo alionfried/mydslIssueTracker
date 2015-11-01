@@ -27,6 +27,11 @@ function einAusblendenDIV(nStatus, nTime) {
 function checkpermission(personID,btnName) {
     //String Name der Person erhalten und dann über Datenbank abfragen, ob die Aktion durchgeführt werden darf
     
+    //PersonID is null, when there is no person in db, so permission check doesn't work
+    if(personID == "null"){
+    	return false;
+    }
+    
     return true;
 }
 
@@ -36,8 +41,7 @@ $('#btnSelectChangeAssignee').change(function(){
 });
 
 $('#btnListCreateIssues').change(function(){
-    var sReturn = this.options(this.selectedIndex).value;
-    alert(sReturn);
+    var sReturn = this.options(this.selectedIndex).value;    
     (loadIssueType(sReturn));
 });
 
@@ -50,9 +54,8 @@ $("#btnCreateNewIssue").click(function () {
 	var personID = navRigth[0].text;
 	var btnName = "btnChangeAssignee";	
     getReturn = (checkpermission(personID,btnName));    
-    if (getReturn == true) {
-        alert(getReturn);
-        einAusblendenDIV(2, 3000);
+    if (getReturn == true) {       
+        einAusblendenDIV(2, 1000);
     }
     else {
         alertNoPermission();
@@ -71,12 +74,11 @@ $('#btnChangeAssignee').click(function () {
     getReturn = (checkpermission(personID,btnName));
     
     if (getReturn == true) {
-        alert(getReturn);
-        einAusblendenDIV(3, 10);
+        einAusblendenDIV(3, 1000);
     }
     else {
         alertNoPermission();
-    }            
+    }
 });
 
 $('#btnSearchIssue').click(function () {
@@ -86,7 +88,7 @@ $('#btnSearchIssue').click(function () {
     getReturn = (checkpermission(personID,btnName));
     getReturn = false;
     if (getReturn == true) {
-        alert(getReturn);
+        
         //noch zu bauen
     }
     else {
@@ -140,8 +142,7 @@ $(function () {
 		$("#btnListCreateIssues").append(myOpt);	
     }
     
-   		var lReturn = getSelectedItemIssueTypes();
-        alert(lReturn);   
+   		var lReturn = getSelectedItemIssueTypes();           
     });
 
 	addPersons();	 
@@ -165,8 +166,7 @@ function getSelectedItemIssueTypes(){
                 i++;
         }
         selectedObject = returnObjekt.value;
-		(loadIssueType(selectedObject));
-		return selectedObject;		
+		(loadIssueType(selectedObject));		
 }
 
 function loadIssueType(div){	
