@@ -21,4 +21,5 @@ repositories {
 // In this section you declare the dependencies for your production and test code
 dependencies {
     compile 'com.sparkjava:spark-core:2.3'
+    compile 'org.mongodb:mongodb-driver:3.0.4'
 }
