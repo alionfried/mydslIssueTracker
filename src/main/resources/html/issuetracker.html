@@ -34,7 +34,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a id="aShow" class="navbar-brand" href="#">Issue Tracker</a>
+                        <a id="aShow" class="navbar-brand">Issue Tracker</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -44,7 +44,7 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Search">
                                     </div>
-                                    <button type="submit" class="btn btn-default">Search Issues</button>
+                                    <button id="btnSearchIssue" type="submit" class="btn btn-default">Search Issues</button>
                                 </form>
                             </li>
                             <li class="dropdown">
@@ -52,7 +52,7 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a id="navRigth">Singed in with Person:</a></li>                                                        
+                            <li><a id="navRigth">null</a></li>                                                        
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -103,17 +103,11 @@
                     </table>
                 </div>
             </div>				
-            <div id="optionCreateNewIssue" class="modal-body">
-                <!--<input name="vorname" id="vorname" type="text" placeholder="Mein Vorname" required /><br />
-                <input name="email" id="email" type="email" placeholder="Vorn.Nachn@irgendwo.com" required /><br />-->
+            <div id="optionCreateNewIssue" class="modal-body">                
                 Here you choose the Issuetype you want to create.<br />
                 <select id="btnListCreateIssues" class="form-control">>
                 </select>                
-            </div>
-            <div id="secondDiv" class="container theme-showcase" role="main">
-                <button id="btnCreateIssue" type="button" class="btn btn-primary">Create</button>
-                <button id="subCreateIssue" type="submit" class="btn btn-primary">Submit</button>
-            </div>
+            </div>            
             <div id="optionChangeAssignee" class="modal-body">
                 Here you change the role/person.<br />
                 <select id="btnSelectChangeAssignee" class="form-control">                    
@@ -126,9 +120,8 @@
 		<!-- In diesem Div wird der benoetige Issue bereitgestellt -->
 		<div id="changeIssueDiv" class="container theme-showcase" role="main">
 		
-		</div>
-		
+		</div>		
         
-            <script src="issuetracker.js"></script>
+       	<script src="issuetracker.js"></script>
 </body>
 </html>

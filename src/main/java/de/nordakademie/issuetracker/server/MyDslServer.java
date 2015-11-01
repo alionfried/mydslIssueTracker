@@ -23,10 +23,7 @@ public class MyDslServer {
 			+	"\"typename\":\"bug\""			
 			+	"},"
 			+	"{"
-			+	"\"typename\":\"issue\""			
-			+	"},"
-			+	"{"
-			+	"\"typename\":\"task\""			
+			+	"\"typename\":\"issue\""
 			+	"}]"
 			+"}";});		
 		

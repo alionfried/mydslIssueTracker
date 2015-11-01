@@ -8,7 +8,6 @@ var aDiv = [
   ['mainDiv'             , true, true, true,true],
   ['issueOverview'       , true, false, false,true],
   ['optionCreateNewIssue', false, true, false, false],
-  ['secondDiv'           , false, true, false, false],
   ['changeIssueDiv'      , false, true, false, false],
   ['optionChangeAssignee', false, false, true, false]
 ];
@@ -25,15 +24,11 @@ function einAusblendenDIV(nStatus, nTime) {
 }
 
 //Hier muss mit der Datenbank gearbeitet werden
-function checkpermission(personname) {
+function checkpermission(personID,btnName) {
     //String Name der Person erhalten und dann über Datenbank abfragen, ob die Aktion durchgeführt werden darf
+    
     return true;
 }
-
-//$('#btnListCreateIssues').click(function(){
-//    var sReturn = this.value;    
-//    alert(sReturn);
-//});
 
 $('#btnSelectChangeAssignee').change(function(){
     var sReturn = this.options(this.selectedIndex).value;
@@ -46,71 +41,57 @@ $('#btnListCreateIssues').change(function(){
     (loadIssueType(sReturn));
 });
 
-function selectedItem() {
-    //var sReturn = this.options(this.selectedIndex).value;
-    var sReturn = $(".selectpicker").change(function () {
-
-        var sReturn = this.options(this.selectedIndex).value;
-
-        alert(sReturn);
-
-    });
-
-    alert(sReturn);
-
-}
-
 $("#aShow").click(function () {
     einAusblendenDIV(1, 1000);
 });
 
 $("#btnCreateNewIssue").click(function () {
-    einAusblendenDIV(2, 3000);    	
-});
-
-$("#btnCreateIssue").click(function () {    
-    getReturn = (checkpermission("alli"));
-    
-    var sReturn;
-    //selectedItem();
-    //$("#optionCreateNewIssue option").each(function () {
-        sReturn = $("#optionCreateNewIssue option");//$(this).options($(this).selectedIndex).value;
-        //var abc = sReturn.options(sReturn.selectedIndex).value;
-        var length = sReturn.length;
-        var selectedObject;
-        var isSelected = false;        
-
-        var returnObjekt;
-        var i = 0;
-        while (isSelected == false && i < length) {
-            //for (var i = 0; i < length; i++) {
-                if (sReturn[i].selected == true) {
-                    isSelected = true;
-                    returnObjekt = sReturn[i];
-                }
-                i++;
-            //}
-        }
-        selectedObject = returnObjekt.value;
-        alert(selectedObject);        
-        
-    //});
-
+    var navRigth = $("#navRigth");
+	var personID = navRigth[0].text;
+	var btnName = "btnChangeAssignee";	
+    getReturn = (checkpermission(personID,btnName));    
     if (getReturn == true) {
         alert(getReturn);
+        einAusblendenDIV(2, 3000);
     }
     else {
-        alert("Sie haben nicht die Berechtigung diese Aktion durchzufuehren.");
-    }
+        alertNoPermission();
+    }    
+        	
 });
 
-$("#btnCreateIssue").click(function () {
-	$("#bug").remove();
-	
-});
+function alertNoPermission(){
+	alert("You don't have the permissions for this action.");
+}
 
 $('#btnChangeAssignee').click(function () {
-    einAusblendenDIV(3, 10);
+	var navRigth = $("#navRigth");
+	var personID = navRigth[0].text;
+	var btnName = "btnChangeAssignee";	
+    getReturn = (checkpermission(personID,btnName));
+    
+    if (getReturn == true) {
+        alert(getReturn);
+        einAusblendenDIV(3, 10);
+    }
+    else {
+        alertNoPermission();
+    }            
+});
+
+$('#btnSearchIssue').click(function () {
+	var navRigth = $("#navRigth");
+	var personID = navRigth[0].text;
+	var btnName = "btnChangeAssignee";	
+    getReturn = (checkpermission(personID,btnName));
+    getReturn = false;
+    if (getReturn == true) {
+        alert(getReturn);
+        //noch zu bauen
+    }
+    else {
+        alertNoPermission();
+    }            
 });
 
 $('#btnSubmit').click(function () {
@@ -126,22 +107,19 @@ function addPersons(){
     	var myOpt = '<option value=' + personid + ' >' + personid + '</option>';    	
 		$("#btnSelectChangeAssignee").append(myOpt);	
     }
-        var sReturn = $("#optionChangeAssignee option");//$(this).options($(this).selectedIndex).value;
-    //var abc = sReturn.options(sReturn.selectedIndex).value;
+    var sReturn = $("#optionChangeAssignee option");    
     var length = sReturn.length;
     var selectedObject;
     var isSelected = false;
 
     var returnObjekt;
     var i = 0;
-    while (isSelected == false && i < length) {
-        //for (var i = 0; i < length; i++) {
+    while (isSelected == false && i < length) {        
         if (sReturn[i].selected == true) {
             isSelected = true;
             returnObjekt = sReturn[i];
         }
         i++;
-        //}
     }
     selectedObject = returnObjekt.value;
 
@@ -149,6 +127,7 @@ function addPersons(){
     });
 }
 
+//start js
 $(function () {
     einAusblendenDIV(1, 10);
     
@@ -162,45 +141,35 @@ $(function () {
     }
     
    		var lReturn = getSelectedItemIssueTypes();
-        alert(lReturn);    
-    
-    
-    
+        alert(lReturn);   
     });
 
-	addPersons();
-	
-	 
+	addPersons();	 
 });
 
 function getSelectedItemIssueTypes(){
 	 var sReturn;
-    //selectedItem();
-    //$("#optionCreateNewIssue option").each(function () {
-        sReturn = $("#optionCreateNewIssue option");//$(this).options($(this).selectedIndex).value;
-        //var abc = sReturn.options(sReturn.selectedIndex).value;
+    
+        sReturn = $("#optionCreateNewIssue option");    
         var length = sReturn.length;
         var selectedObject;
         var isSelected = false;        
 
         var returnObjekt;
         var i = 0;
-        while (isSelected == false && i < length) {
-            //for (var i = 0; i < length; i++) {
+        while (isSelected == false && i < length) {            
                 if (sReturn[i].selected == true) {
                     isSelected = true;
                     returnObjekt = sReturn[i];
                 }
                 i++;
-            //}
         }
         selectedObject = returnObjekt.value;
 		(loadIssueType(selectedObject));
 		return selectedObject;		
 }
 
-function loadIssueType(div){
-	alert(div);
+function loadIssueType(div){	
 	var tmpDiv = "individualInput.html #" + div;
 	$("#changeIssueDiv").load(tmpDiv);
 }
