@@ -40,6 +40,12 @@ $('#btnSelectChangeAssignee').change(function(){
     $("#navRigth").text(sReturn);
 });
 
+$('#btnListCreateIssues').change(function(){
+    var sReturn = this.options(this.selectedIndex).value;
+    alert(sReturn);
+    (loadIssueType(sReturn));
+});
+
 function selectedItem() {
     //var sReturn = this.options(this.selectedIndex).value;
     var sReturn = $(".selectpicker").change(function () {
@@ -53,14 +59,6 @@ function selectedItem() {
     alert(sReturn);
 
 }
-
-$("#btnHide").click(function () {    
-    einAusblendenDIV(3, 100);
-});
-
-$("#btnShow").click(function () {
-    einAusblendenDIV(4, 300);
-});
 
 $("#aShow").click(function () {
     einAusblendenDIV(1, 1000);
@@ -107,7 +105,7 @@ $("#btnCreateIssue").click(function () {
 });
 
 $("#btnCreateIssue").click(function () {
-	$("#changeIssueDiv").load("test.html #change");
+	$("#bug").remove();
 	
 });
 
@@ -115,9 +113,8 @@ $('#btnChangeAssignee').click(function () {
     einAusblendenDIV(3, 10);
 });
 
-$("#btnCreateIssue").click(function () {
-    $("#standardInputDiv").load("standardInput.html");
-
+$('#btnSubmit').click(function () {
+    alert("abc");
 });
 
 function addPersons(){
@@ -163,9 +160,47 @@ $(function () {
     	var myOpt = '<option value=' + issuename + ' >' + issuename + '</option>';    	
 		$("#btnListCreateIssues").append(myOpt);	
     }
-    });    
+    
+   		var lReturn = getSelectedItemIssueTypes();
+        alert(lReturn);    
+    
+    
+    
+    });
 
 	addPersons();
 	
-
+	 
 });
+
+function getSelectedItemIssueTypes(){
+	 var sReturn;
+    //selectedItem();
+    //$("#optionCreateNewIssue option").each(function () {
+        sReturn = $("#optionCreateNewIssue option");//$(this).options($(this).selectedIndex).value;
+        //var abc = sReturn.options(sReturn.selectedIndex).value;
+        var length = sReturn.length;
+        var selectedObject;
+        var isSelected = false;        
+
+        var returnObjekt;
+        var i = 0;
+        while (isSelected == false && i < length) {
+            //for (var i = 0; i < length; i++) {
+                if (sReturn[i].selected == true) {
+                    isSelected = true;
+                    returnObjekt = sReturn[i];
+                }
+                i++;
+            //}
+        }
+        selectedObject = returnObjekt.value;
+		(loadIssueType(selectedObject));
+		return selectedObject;		
+}
+
+function loadIssueType(div){
+	alert(div);
+	var tmpDiv = "individualInput.html #" + div;
+	$("#changeIssueDiv").load(tmpDiv);
+}
