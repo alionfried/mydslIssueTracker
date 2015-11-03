@@ -5,6 +5,7 @@ import static spark.Spark.*;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import org.bson.Document;
 import org.eclipse.jetty.util.MultiMap;
 import org.eclipse.jetty.util.UrlEncoded;
 
@@ -41,10 +42,15 @@ public class MyDslServer {
 			return mongoWrapper.getFullCollectionAsJson("persons");
 		});
 		
-		post("/issues", (req, res) -> {
-			MultiMap<String> formData = new MultiMap<String>();
-			UrlEncoded.decodeTo(req.body(), formData, "UTF-8");
+		post("/submitIssue", (req, res) -> {
+//			MultiMap<String> formData = new MultiMap<String>();
+//			UrlEncoded.decodeTo(req.body(), formData, "UTF-8");
+			String formData = "";
+			formData=UrlEncoded.decodeString(req.body());
+			System.out.println(formData.toString());
 			
+			Document formDataJson = Document.parse(formData);
+			mongoWrapper.writeDocumentToMongo(formDataJson, "issues");
 			return "";
 		});
 	}

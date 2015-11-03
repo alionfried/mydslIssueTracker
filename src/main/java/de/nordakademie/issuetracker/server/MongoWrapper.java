@@ -20,6 +20,9 @@ public class MongoWrapper {
 		this.databaseName = databaseName;
 		this.mongoDb = mongoClient.getDatabase(databaseName);
 	}
+	public void writeDocumentToMongo(Document document, String collectionName){
+		mongoDb.getCollection(collectionName).insertOne(document);
+	}
 
 	public String getFullCollectionAsJson(String collectionName){
 		MongoCollection<Document> collection = (MongoCollection<Document>) mongoDb.getCollection(collectionName);
