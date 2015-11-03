@@ -29,7 +29,7 @@ function checkpermission(personID,btnName) {
     
     //PersonID is null, when there is no person in db, so permission check doesn't work
     if(personID == "null"){
-    	return false;
+    	return true;
     }
     
     return true;
@@ -102,11 +102,14 @@ $('#btnSubmit').click(function () {
 
 function addPersons(){
 	//add persons    
-    $.get( "http://localhost:4567/getPersons", function( data ) {
-    var persons = data.persons;
+    $.get( "http://localhost:4567/getPersonsFromDb", function( data ) {
+    var persons = data;
     for (var i = 0; i < persons.length; i++) {
-    	var personid = persons[i].id;
-    	var myOpt = '<option value=' + personid + ' >' + personid + '</option>';    	
+    	var personid = persons[i]._id.$oid;
+		var surname = persons[i].surname;
+		var forename = persons[i].forename;
+		var personFullName = forename + " " + surname
+    	var myOpt = '<option value=' + personid + ' >' + personFullName + '</option>';    	
 		$("#btnSelectChangeAssignee").append(myOpt);	
     }
     var sReturn = $("#optionChangeAssignee option");    

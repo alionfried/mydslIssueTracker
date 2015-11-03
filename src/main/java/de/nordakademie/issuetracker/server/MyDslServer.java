@@ -24,8 +24,6 @@ public class MyDslServer {
 		boolean deleteDataBeforeStart = true;
 		mi.initialize(deleteDataBeforeStart);
 		
-		
-		
 		staticFileLocation("/html");
 		
 		get("/", (req, res) -> {
