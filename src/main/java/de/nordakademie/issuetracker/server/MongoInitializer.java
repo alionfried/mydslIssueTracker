@@ -45,11 +45,7 @@ public class MongoInitializer {
 		
 		Document issueTypes = Document.parse(ISSUETYPES_JSON);
 		db.getCollection("issueTypes").insertMany((ArrayList<? extends Document>) issueTypes.get("issueTypes"));
-		
-		// ArrayList<Document> personsArray=(ArrayList) persons.get("persons");
-		// db.getCollection("persons").insertMany(personsArray);
-		// personsArray.forEach((person) ->
-		// db.getCollection("persons").insertOne(person));
+
 	}
 
 	private static void createCollectionIfNotExsists(MongoDatabase db, String collectionName,boolean dropBeforeRun) {

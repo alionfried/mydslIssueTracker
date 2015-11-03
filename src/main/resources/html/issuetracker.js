@@ -90,7 +90,7 @@ $.ajax
         dataType: 'json',
         async: false,
         //json object to sent to the authentication url
-        data: '{"issueType": "Bug", "status" : "open"}',
+        data: '{"issueType": "Bug", "status" : "open", "discription" : "alles ist kaputt omg omg omg"}',
         success: function () {
 
         alert("Thanks!"); 
@@ -99,7 +99,7 @@ $.ajax
 }
 
 $('#btnSearchIssue').click(function () {
-	//$.post( "http://localhost:4567/submitIssue", { "issueType": "Bug", "status": "open", "description":"Alles Kaputt" },"json" );
+	$.post( "http://localhost:4567/search", "kaputt" );
 	sendJson();
 	
 	var navRigth = $("#navRigth");

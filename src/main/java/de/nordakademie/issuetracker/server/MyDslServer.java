@@ -4,6 +4,7 @@ import static spark.Spark.*;
 
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import org.bson.Document;
 import org.eclipse.jetty.util.MultiMap;
@@ -44,13 +45,21 @@ public class MyDslServer {
 		});
 		
 		post("/submitIssue", (req, res) -> {
-//			MultiMap<String> formData = new MultiMap<String>();
-//			UrlEncoded.decodeTo(req.body(), formData, "UTF-8");
 			String formData=UrlEncoded.decodeString(req.body());
 			System.out.println(formData.toString());
 			
 			Document formDataJson = Document.parse(formData);
 			mongoWrapper.writeDocumentToMongo(formDataJson, "issues");
+			res.status(200);
+			return "";
+		});
+		
+		post("/search", (req, res) -> {
+			String formData=UrlEncoded.decodeString(req.body());
+			System.out.println(formData.toString());
+			
+//			Document filter = new Document("status", Pattern.compile("/"+formData+"/"));
+			mongoWrapper.searchInMongo(formData.toString(), "issues");
 			res.status(200);
 			return "";
 		});
