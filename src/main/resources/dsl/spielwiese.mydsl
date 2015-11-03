@@ -5,7 +5,7 @@ Status abgenommen
 Status abgeschlossen 
 Status zurueckgezogen
 
-Transition offen_inBearbeitung named "in Bearbeitung nehmen" { 
+Transition offen_inBearbeitung named "toInBearbeitung" { 
 	offen to inBearbeitung
 }
 
@@ -59,11 +59,11 @@ DateField beginnDatum as "Beginndatum" {
 }
 
 DateField endeDatum as "Enddatum" {
-	default 31 . 12 . 9999 //--> seit Terminals erwartet er Leerzeichen vor und nach '.' -> habe Jan ne Mail geschrieben
+	default 31.12.9999
 }
 
 MailField kontakt as "Kontaktmail" {
-	default barbapapa4@TRAUM.De 
+	default <barbapapa4@TRAUM.De>
 }
 
 ComboField prio as "Priorität" {
