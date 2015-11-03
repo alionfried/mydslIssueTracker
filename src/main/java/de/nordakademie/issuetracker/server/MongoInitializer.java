@@ -27,8 +27,8 @@ public class MongoInitializer {
 		fillTicketDB(ticketDB);
 
 		// Zeigt alle Datenbanken an
-		Iterable<String> dbs = client().listDatabaseNames();
-		dbs.forEach((String element) -> System.out.println(element));
+//		Iterable<String> dbs = client().listDatabaseNames();
+//		dbs.forEach((String element) -> System.out.println(element));
 	}
 
 	private MongoDatabase createTicketDB(boolean dropBeforeRun) {
