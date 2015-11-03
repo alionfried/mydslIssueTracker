@@ -8,8 +8,23 @@ import java.util.Scanner;
 import org.eclipse.jetty.util.MultiMap;
 import org.eclipse.jetty.util.UrlEncoded;
 
+import com.mongodb.MongoClient;
+
 public class MyDslServer {
 	public static void main(String[] args) {
+		
+		final String DATABASE_NAME = "mydslIssueTracker";
+		
+		MongoInitializer mi = new MongoInitializer();
+		MongoClient mongoClient = mi.client();
+		
+		MongoWrapper mongoWrapper = new MongoWrapper(mongoClient,DATABASE_NAME);
+		
+		//Mongo initialisieren
+		boolean deleteDataBeforeStart = true;
+		mi.initialize(deleteDataBeforeStart);
+		
+		
 		
 		staticFileLocation("/html");
 		
@@ -40,6 +55,12 @@ public class MyDslServer {
 					+ 	"\"role\":\"developer\""
 					+	"}]"
 					+"}";});
+		
+		get("/getPersonsFromDb", (req, res) -> {
+			res.type("application/json");
+			return mongoWrapper.getFullCollectionAsJson("persons");
+		});
+		
 		post("/issues", (req, res) -> {
 			MultiMap<String> formData = new MultiMap<String>();
 			UrlEncoded.decodeTo(req.body(), formData, "UTF-8");
