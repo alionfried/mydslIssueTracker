@@ -32,29 +32,11 @@ public class MyDslServer {
 			return loadFile("/html/issuetracker.html");
 		});
 		
-		get("/getIssuetypes", (req, res) -> {
+		get("/getIssueTypesFromDb", (req, res) -> {
 			res.type("application/json");
-			return "{\"issueTypes\":[{"
-			+	"\"typename\":\"bug\""			
-			+	"},"
-			+	"{"
-			+	"\"typename\":\"issue\""
-			+	"}]"
-			+"}";});		
+			return mongoWrapper.getFullCollectionAsJson("issueTypes");
+		});
 		
-		get("/getPersons", (req, res) -> {
-			res.type("application/json");
-			return "{\"persons\":[{"
-					+	"\"id\":\"P009876\","
-					+	" \"surname\":\"Maiser\","
-					+	" \"role\":\"admin\""
-					+	"},"
-					+	"{"
-					+	"\"id\":\"P994466\","
-					+	"\"surname\":\"Muster\","
-					+ 	"\"role\":\"developer\""
-					+	"}]"
-					+"}";});
 		
 		get("/getPersonsFromDb", (req, res) -> {
 			res.type("application/json");
