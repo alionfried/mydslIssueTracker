@@ -1,13 +1,13 @@
 package de.nordakademie.issuetracker.server;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.post;
+import static spark.Spark.staticFileLocation;
 
 import java.io.InputStream;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import org.bson.Document;
-import org.eclipse.jetty.util.MultiMap;
 import org.eclipse.jetty.util.UrlEncoded;
 
 import com.mongodb.MongoClient;
