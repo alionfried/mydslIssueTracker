@@ -67,7 +67,7 @@ MailField kontakt as "Kontaktmail" {
 }
 
 ComboField prio as "Priorität" {
-	default { "hoch" "mittel" "gering"}
+	default { "hoch", "mittel", "gering"}
 }
 
 StringField field as "test" {
@@ -98,9 +98,9 @@ Role bearbeiter {
 }
 
 Role anforderer {
+	create Issue	
 	inBearbeitung_zurueckgezogen
 	offen_zurueckgezogen
-	create Issue	
 }
 
 Role admin {
