@@ -39,18 +39,19 @@ public class MyDslServer {
 		
 		get("/getPersonsFromDb", (req, res) -> {
 			res.type("application/json");
+			res.status(200);
 			return mongoWrapper.getFullCollectionAsJson("persons");
 		});
 		
 		post("/submitIssue", (req, res) -> {
 //			MultiMap<String> formData = new MultiMap<String>();
 //			UrlEncoded.decodeTo(req.body(), formData, "UTF-8");
-			String formData = "";
-			formData=UrlEncoded.decodeString(req.body());
+			String formData=UrlEncoded.decodeString(req.body());
 			System.out.println(formData.toString());
 			
 			Document formDataJson = Document.parse(formData);
 			mongoWrapper.writeDocumentToMongo(formDataJson, "issues");
+			res.status(200);
 			return "";
 		});
 	}
