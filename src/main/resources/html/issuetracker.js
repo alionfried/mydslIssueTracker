@@ -137,11 +137,11 @@ $(function () {
     einAusblendenDIV(1, 10);
     
     //add issuetypes
-    $.get( "http://localhost:4567/getIssuetypes", function( data ) {
-    var issues = data.issueTypes;
-    for (var i = 0; i < issues.length; i++) {
-    	var issuename = issues[i].typename;
-    	var myOpt = '<option value=' + issuename + ' >' + issuename + '</option>';    	
+    $.get( "http://localhost:4567/getIssueTypesFromDb", function( data ) {
+    var issueTypes = data;
+    for (var i = 0; i < issueTypes.length; i++) {
+    	var issueType = issueTypes[i].issueType;
+    	var myOpt = '<option value=' + issueType + ' >' + issueType + '</option>';    	
 		$("#btnListCreateIssues").append(myOpt);	
     }
     

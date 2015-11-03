@@ -2,10 +2,10 @@ package de.nordakademie.issuetracker.server;
 
 public final class DataJson {
 	public static String ISSUETYPES_JSON = "{\"issueTypes\":[{"
-			+	"\"typename\":\"bug\""			
+			+	"\"issueType\":\"bug\""			
 			+	"},"
 			+	"{"
-			+	"\"typename\":\"issue\""
+			+	"\"issueType\":\"issue\""
 			+	"}]"
 			+"}";
 	
