@@ -99,16 +99,18 @@ $.ajax
 }
 
 $('#btnSearchIssue').click(function () {
-	$.post( "http://localhost:4567/search", "kaputt" );
-	sendJson();
-	
 	var navRigth = $("#navRigth");
 	var personID = navRigth[0].text;
 	var btnName = "btnChangeAssignee";	
     getReturn = (checkpermission(personID,btnName));
-    getReturn = false;
+    //getReturn = false;
     if (getReturn == true) {
         
+    var inputSearch = $("#inputSearch");
+	var searchTxt = inputSearch[0].value;
+	$.post( "http://localhost:4567/search", searchTxt );	
+
+	sendJson();
         //noch zu bauen
     }
     else {
@@ -116,8 +118,9 @@ $('#btnSearchIssue').click(function () {
     }            
 });
 
-$('#btnSubmit').click(function () {
-    alert("abc");
+$('#btnSubmit').submit(function (event) {
+  alert( "Handler for .submit() called." );
+  event.preventDefault();   
 });
 
 function addPersons(){
