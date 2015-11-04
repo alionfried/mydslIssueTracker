@@ -59,11 +59,11 @@ DateField beginnDatum as "Beginndatum" {
 }
 
 DateField endeDatum as "Enddatum" {
-	default 31.12.9999
+	default 31 . 12 . 9999
 }
 
 MailField kontakt as "Kontaktmail" {
-	default <barbapapa4@TRAUM.De>
+	default barbapapa4@TRAUM.De
 }
 
 ComboField prio as "Priorität" {
