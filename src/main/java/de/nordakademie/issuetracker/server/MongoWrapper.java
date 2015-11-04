@@ -26,11 +26,12 @@ public class MongoWrapper {
 		mongoDb.getCollection(collectionName).insertOne(document);
 	}
 	
-	public void searchInMongo(String searchTerm, String collectionName){
+	public Document searchInMongo(String searchTerm, String collectionName){
 		BasicDBObject query = new BasicDBObject();
-		query.put("status",  java.util.regex.Pattern.compile(".*"+searchTerm+".*", Pattern.CASE_INSENSITIVE));
-		System.out.println(mongoDb.getCollection(collectionName).find(query).first());
-		
+		query.put("discription",  java.util.regex.Pattern.compile(".*"+searchTerm+".*", Pattern.CASE_INSENSITIVE));
+		Document issue = mongoDb.getCollection(collectionName).find(query).first();
+		System.out.println(issue);
+		return issue;		
 	}
 
 	public String getFullCollectionAsJson(String collectionName){

@@ -98,7 +98,7 @@ $.ajax
     })
 }
 
-$('#btnSearchIssue').click(function () {
+$('#btnSearchIssue').click(function ( data ) {
 	var navRigth = $("#navRigth");
 	var personID = navRigth[0].text;
 	var btnName = "btnChangeAssignee";	
@@ -109,13 +109,10 @@ $('#btnSearchIssue').click(function () {
     var inputSearch = $("#inputSearch");
 	var searchTxt = inputSearch[0].value;
 	$.post( "http://localhost:4567/search", searchTxt );	
-
-	sendJson();
-        //noch zu bauen
-    }
-    else {
-        alertNoPermission();
-    }            
+	//sendJson();
+	var json = data;
+	alert(json.status);
+    }          
 });
 
 function addPersons(){

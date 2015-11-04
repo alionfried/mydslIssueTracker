@@ -56,12 +56,12 @@ public class MyDslServer {
 		
 		post("/search", (req, res) -> {
 			String formData=UrlEncoded.decodeString(req.body());
-			System.out.println(formData.toString());
-			
-//			Document filter = new Document("status", Pattern.compile("/"+formData+"/"));
-			mongoWrapper.searchInMongo(formData.toString(), "issues");
+			Document issue = mongoWrapper.searchInMongo(formData.toString(), "issues");
+			res.type("application/json");
+			res.body(issue.toJson());
 			res.status(200);
-			return "";
+			System.out.println(res.body());
+			return res;
 		});
 	}
 	
