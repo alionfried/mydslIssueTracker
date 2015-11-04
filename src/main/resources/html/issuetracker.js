@@ -118,7 +118,7 @@ $('#btnSearchIssue').click(function () {
     }            
 });
 
-$('#btnSubmit').submit(function (event) {
+$("#btnSubmit").submit(function (event) {
   alert( "Handler for .submit() called." );
   event.preventDefault();   
 });
