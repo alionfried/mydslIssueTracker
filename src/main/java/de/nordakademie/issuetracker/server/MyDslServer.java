@@ -58,10 +58,9 @@ public class MyDslServer {
 			String formData=UrlEncoded.decodeString(req.body());
 			Document issue = mongoWrapper.searchInMongo(formData.toString(), "issues");
 			res.type("application/json");
-			res.body(issue.toJson());
 			res.status(200);
-			System.out.println(res.body());
-			return res;
+			System.out.println(res);
+			return issue.toJson();
 		});
 	}
 	

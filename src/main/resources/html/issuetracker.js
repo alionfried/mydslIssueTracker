@@ -98,21 +98,32 @@ $.ajax
     })
 }
 
-$('#btnSearchIssue').click(function ( data ) {
+function sendSearch(searchTxt){
+$.ajax({
+    type:"POST",
+    url: "http://localhost:4567/search",
+    data:searchTxt,
+    dataType: 'json',
+    success: function(data){
+        console.log("data:" + data.status);
+    },
+    error: function(data){
+        console.log("error");
+    }
+});
+
+}
+
+$('#btnSearchIssue').click(function () {
 	var navRigth = $("#navRigth");
 	var personID = navRigth[0].text;
 	var btnName = "btnChangeAssignee";	
     getReturn = (checkpermission(personID,btnName));
     //getReturn = false;
-    if (getReturn == true) {
-        
+       
     var inputSearch = $("#inputSearch");
 	var searchTxt = inputSearch[0].value;
-	$.post( "http://localhost:4567/search", searchTxt );	
-	//sendJson();
-	var json = data;
-	alert(json.status);
-    }          
+	sendSearh(searchTxt)   
 });
 
 function addPersons(){
