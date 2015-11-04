@@ -37,7 +37,7 @@ Transition inBearbeitung_abgeschlossen named "abschliessen" {
 
 Workflow workflowKurz { 
 	offen_inBearbeitung 
-	offen_zurueckgezogen 
+	offen_zurueckgezogen
 	inBearbeitung_zuTesten 
 	inBearbeitung_zurueckgezogen 
 	zuTesten_inBearbeitung 

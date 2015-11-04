@@ -148,9 +148,44 @@ function addPersons(){
 }
 
 $("body").on("submit","#formSubmit", function(event){
-  	alert( "Handler for .submit() called." );
-  event.preventDefault();  
+	//var targetInformations = event.target;
+	var formData = $(this).serializeObject();
+	console.log("abc");
+    console.log(formData);
+	
+	var navRigth = $("#navRigth");
+	var personID = navRigth[0].text;
+	var btnName = "btnChangeAssignee";	
+    getReturn = (checkpermission(personID,btnName));
+    //getReturn = false;
+    if (getReturn == true) {        
+	
+	alert( "Handler for .submit() called." );
+		
+	sendJson();
+        //noch zu bauen
+    }
+    else {
+    	event.preventDefault();
+        alertNoPermission();
+    }   	
 });
+
+    $.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 
 //start js
 $(function () {
