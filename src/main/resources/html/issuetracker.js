@@ -118,11 +118,6 @@ $('#btnSearchIssue').click(function () {
     }            
 });
 
-$("#btnSubmit").submit(function (event) {
-  alert( "Handler for .submit() called." );
-  event.preventDefault();   
-});
-
 function addPersons(){
 	//add persons    
     $.get( "http://localhost:4567/getPersonsFromDb", function( data ) {
@@ -155,9 +150,14 @@ function addPersons(){
     });
 }
 
+$("body").on("submit","#formSubmit", function(event){
+  	alert( "Handler for .submit() called." );
+  event.preventDefault();  
+});
+
 //start js
 $(function () {
-    einAusblendenDIV(1, 10);
+    einAusblendenDIV(1, 10); 
     
     //add issuetypes
     $.get( "http://localhost:4567/getIssueTypesFromDb", function( data ) {
