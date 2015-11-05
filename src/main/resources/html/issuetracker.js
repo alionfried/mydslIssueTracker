@@ -158,11 +158,10 @@ function addPersons(){
     });
 }
 
-$("body").on("submit","#formSubmit", function(event){
+$("body").on("submit", function(event){
 	//var targetInformations = event.target;
 	var formData = $(this).serializeObject();
-	console.log("abc");
-    console.log(formData);
+    console.log($('#formSubmit').serializeArray());
 	
 	var navRigth = $("#navRigth");
 	var personID = navRigth[0].text;
