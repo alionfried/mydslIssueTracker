@@ -81,7 +81,7 @@ $('#btnChangeAssignee').click(function () {
     }
 });
 
-function sendJson(){
+function sendJson(json){
 $.ajax
     ({
         type: "POST",
@@ -90,7 +90,7 @@ $.ajax
         dataType: 'json',
         async: false,
         //json object to sent to the authentication url
-        data: '{"issueType": "Bug", "status" : "open", "discription" : "alles ist kaputt omg omg omg"}',
+        data: json,
         success: function () {
 
         alert("Thanks!"); 
@@ -175,7 +175,7 @@ $("body").on("submit", function(event){
 	
 	alert( "Handler for .submit() called." );
 		
-	sendJson();
+	sendJson(json);
         //noch zu bauen
     }
     else {
