@@ -2,35 +2,40 @@
 		
 <div id="bug" class="form-group">
 <form id="formSubmit" action="" class="form-horizontal">
-
+		
 <!-- Statusinformationen -->
-<div class="form-group">
-		<label for="statusField" class="col-sm-2 control-label">statusField</label>
-	    <div class="col-sm-10">
-	      <input type="text" name="statusField" class="form-control" id="statusField" value="offen" disabled>
-	    </div>
+					
+		
+			<input type="text" class="form-control" id="bug" name="bug" value="bug" disabled>
+		
+		
+	<div class="form-group">								
+			<label for="statusField" class="col-sm-2 control-label">statusField</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="statusField" name="statusField" value="offen" disabled>
+			</div>
 	</div>
 	<div class="form-group">
 		<label for="beschreibung" class="col-sm-2 control-label">beschreibung</label>
 	    <div class="col-sm-10">
-	      <input type="text" name="description" class="form-control" id="beschreibung" value="">
+	      <input type="text" class="form-control" id="beschreibung" name="beschreibung" value="">
 	    </div>
 	</div>	
 
 <!-- Weitere Statusinformationen -->	
 <label for="beginnDatum" class="col-sm-2 control-label">Beginndatum</label>
 <div class="col-sm-10">
-			      		<input type="text" name="beginnDatum" class="form-control" id="beginnDatum" value="04.11.2015">
+			      		<input type="text" class="form-control" id="beginnDatum" name="beginnDatum" value="05.11.2015">
 			   		</div>
 	    <label for="assignee" class="col-sm-2 control-label">Bearbeiter</label>
 	    <div class="col-sm-10">
-			      	<input type="text" class="form-control" id="assignee" value="L000043">				      		
+			      	<input type="text" class="form-control" id="assignee" name="assignee" value="L000043">				      		
 			   		</div>
 	
 <!-- Hier werden die IssueType speziellen Felder erstellt -->	
 			    <label for="prio" class="col-sm-2 control-label">Priorität</label>
 			    <div class="col-sm-10">
-			    	<select id="prio" class="form-control">
+			    	<select id="prio" name="prio" class="form-control">
 <option>hoch</option>
 <option>mittel</option>
 <option>gering</option>
@@ -46,39 +51,44 @@
 		
 <div id="issue" class="form-group">
 <form id="formSubmit" action="" class="form-horizontal">
-
+		
 <!-- Statusinformationen -->
-<div class="form-group">
-		<label for="statusField" class="col-sm-2 control-label">statusField</label>
-	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="statusField" value="offen" disabled>
-	    </div>
+					
+		
+			<input type="text" class="form-control" id="issue" name="issue" value="issue" disabled>
+		
+		
+	<div class="form-group">								
+			<label for="statusField" class="col-sm-2 control-label">statusField</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="statusField" name="statusField" value="offen" disabled>
+			</div>
 	</div>
 	<div class="form-group">
 		<label for="beschreibung" class="col-sm-2 control-label">beschreibung</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="beschreibung" value="">
+	      <input type="text" class="form-control" id="beschreibung" name="beschreibung" value="">
 	    </div>
 	</div>	
 
 <!-- Weitere Statusinformationen -->	
 <label for="beginnDatum" class="col-sm-2 control-label">Beginndatum</label>
 <div class="col-sm-10">
-			      		<input type="text" class="form-control" id="beginnDatum" value="04.11.2015">
+			      		<input type="text" class="form-control" id="beginnDatum" name="beginnDatum" value="05.11.2015">
 			   		</div>
 	    <label for="assignee" class="col-sm-2 control-label">Bearbeiter</label>
 	    <div class="col-sm-10">
-			      	<input type="text" class="form-control" id="assignee" value="L000043">				      		
+			      	<input type="text" class="form-control" id="assignee" name="assignee" value="L000043">				      		
 			   		</div>
 	
 <!-- Hier werden die IssueType speziellen Felder erstellt -->	
 			    <label for="endeDatum" class="col-sm-2 control-label">Enddatum</label>
 			    <div class="col-sm-10">
-			      		<input type="text" class="form-control" id="endeDatum" value="31.12.9999">
+			      		<input type="text" class="form-control" id="endeDatum" name="endeDatum" value="31.12.9999">
 			   		 </div>
 <label for="checkBetriebsrat" class="col-sm-2 control-label">Betriebsrat</label>
 			    		<div class="col-sm-10">
-			      			<input type="checkbox" id="checkBetriebsrat" value="Betriebsrat">
+			      			<input type="checkbox" id="checkBetriebsrat" name="checkBetriebsrat" value="Betriebsrat">
 			   			 </div>
 	<div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
