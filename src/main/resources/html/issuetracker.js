@@ -160,9 +160,12 @@ function addPersons(){
 
 $("body").on("submit", function(event){
 	//var targetInformations = event.target;
-	var formData = $(this).serializeObject();
-    console.log($('#formSubmit').serializeArray());
+	//var formData = $(this).serializeObject();
+    //console.log($('#formSubmit').serializeArray());
 	
+    var json = $('#formSubmit').serializeJSON();
+    console.log(json);
+    
 	var navRigth = $("#navRigth");
 	var personID = navRigth[0].text;
 	var btnName = "btnChangeAssignee";	
@@ -180,22 +183,6 @@ $("body").on("submit", function(event){
         alertNoPermission();
     }   	
 });
-
-    $.fn.serializeObject = function() {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function() {
-            if (o[this.name]) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
-                }
-                o[this.name].push(this.value || '');
-            } else {
-                o[this.name] = this.value || '';
-            }
-        });
-        return o;
-    };
 
 //start js
 $(function () {
