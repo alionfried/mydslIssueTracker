@@ -164,7 +164,8 @@ $("body").on("submit", function(event){
     //console.log($('#formSubmit').serializeArray());
 	
     var json = $('#formSubmit').serializeJSON();
-    console.log(json);
+    var jsonString2 = JSON.stringify(json);
+    //console.log(json);
     
 	var navRigth = $("#navRigth");
 	var personID = navRigth[0].text;
@@ -175,7 +176,7 @@ $("body").on("submit", function(event){
 	
 	alert( "Handler for .submit() called." );
 		
-	sendJson(json);
+	sendJson(jsonString2);
         //noch zu bauen
     }
     else {

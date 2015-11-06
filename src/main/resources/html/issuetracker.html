@@ -19,13 +19,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>				    
-	
-	
-	<script src="typeahead.bundle.js"></script>
-    <script src="typeahead.bundle.min.js"></script>      
-  </head>
-	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>				    	
+		         
+  </head>	
 	<body id="issueBody" role="document">
         <header>
             <nav class="navbar navbar-default">
@@ -44,10 +40,8 @@
                             <li><a id="btnCreateNewIssue" data-toggle="modal" data-target="#ChooseIssueType">Create New Issue</a></li>
                             <li>
                                 <form class="navbar-form navbar-left" role="search">
-                                    <div class="form-group">
-                                    	<div id="the-basics">
-                                        	<input id="inputSearch" type="text" class="typeahead" placeholder="Search">
-                                        </div>
+                                    <div class="form-group">                                    	
+                                        	<input id="inputSearch" type="text" class="form-control" placeholder="Search">                                        
                                     </div>
                                     <button id="btnSearchIssue" type="button" class="btn btn-default">Search Issues</button>
                                 </form>
@@ -65,7 +59,7 @@
             
         </header>
 
-		<div id="mainDiv" class="container theme-showcase" role="main">						
+		<div id="mainDiv" class="container theme-showcase" role="main">								  
 		  <!-- Main jumbotron for a primary marketing message or call to action -->
 			<div class="jumbotron">
 				<h1>Issue Tracker Information</h1>
