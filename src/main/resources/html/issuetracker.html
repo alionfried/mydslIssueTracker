@@ -20,7 +20,10 @@
 	
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>				    
-      
+	
+	
+	<script src="typeahead.bundle.js"></script>
+    <script src="typeahead.bundle.min.js"></script>      
   </head>
 	
 	<body id="issueBody" role="document">
@@ -42,7 +45,9 @@
                             <li>
                                 <form class="navbar-form navbar-left" role="search">
                                     <div class="form-group">
-                                        <input id="inputSearch" type="text" class="form-control" placeholder="Search">
+                                    	<div id="the-basics">
+                                        	<input id="inputSearch" type="text" class="typeahead" placeholder="Search">
+                                        </div>
                                     </div>
                                     <button id="btnSearchIssue" type="button" class="btn btn-default">Search Issues</button>
                                 </form>
@@ -60,8 +65,7 @@
             
         </header>
 
-		<div id="mainDiv" class="container theme-showcase" role="main">			
-			
+		<div id="mainDiv" class="container theme-showcase" role="main">						
 		  <!-- Main jumbotron for a primary marketing message or call to action -->
 			<div class="jumbotron">
 				<h1>Issue Tracker Information</h1>
@@ -120,6 +124,7 @@
 		</div>		
         
        	<script src="issuetracker.js"></script>
-       	<script src="formtoJson.js"></script>
+       	<script src="formtoJson.js"></script>       	
+       	
 </body>
 </html>
