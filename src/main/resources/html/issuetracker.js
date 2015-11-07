@@ -36,7 +36,8 @@ function checkpermission(personID,btnName) {
 }
 
 $('#btnSelectChangeAssignee').change(function(){
-    var sReturn = this.options(this.selectedIndex).value;
+    //var sReturn = this.options(this.selectedIndex).value;
+	var sReturn = this.options(this.selectedIndex).text;
     $("#navRigth").text(sReturn);
 });
 
@@ -123,7 +124,7 @@ $('#btnSearchIssue').click(function () {
        
     var inputSearch = $("#inputSearch");
 	var searchTxt = inputSearch[0].value;
-	sendSearh(searchTxt)   
+	sendSearch(searchTxt);  
 });
 
 function addPersons(){
@@ -134,7 +135,7 @@ function addPersons(){
     	var personid = persons[i]._id.$oid;
 		var surname = persons[i].surname;
 		var forename = persons[i].forename;
-		var personFullName = forename + " " + surname
+		var personFullName = forename + " " + surname;
     	var myOpt = '<option value=' + personid + ' >' + personFullName + '</option>';    	
 		$("#btnSelectChangeAssignee").append(myOpt);	
     }
@@ -152,7 +153,8 @@ function addPersons(){
         }
         i++;
     }
-    selectedObject = returnObjekt.value;
+    //selectedObject = returnObjekt.value;
+    selectedObject = returnObjekt.text;
 
     $("#navRigth").text(selectedObject);
     });
