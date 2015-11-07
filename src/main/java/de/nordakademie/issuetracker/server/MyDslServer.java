@@ -62,7 +62,7 @@ public class MyDslServer {
 			
 			Document formDataJson = Document.parse(formData);
 			//entfernen wenn ObjectId in post enthalten
-			formDataJson.put("_id",new ObjectId("563d25ed782d2b35604da572"));
+			//formDataJson.put("_id",new ObjectId("563d25ed782d2b35604da572"));
 			mongoWrapper.updateDocumentInMongo(formDataJson, "issues");
 			res.status(200);
 			return "";

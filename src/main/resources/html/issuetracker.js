@@ -184,18 +184,19 @@ $("body").on("submit", function(event){
 	
 	alert( "Handler for .submit() called." );
 		
-	if(json.issueID == null){
+	if(json._id == "null"){
 		alert('neuanlage');
-		//sendJson(jsonString2,"submitIssue");
-		sendJson(jsonString2,"updateIssue");
+		sendJson(jsonString2,"submitIssue");
+		//sendJson(jsonString2,"updateIssue");
 	}
 	else{
-		event.preventDefault();
-		alert("update funktion muss hier implementiert werden, der json string steht schon zur verfügung");
+//		event.preventDefault();
+		alert('update')
+		sendJson(jsonString2,"updateIssue");
+		//alert("update funktion muss hier implementiert werden, der json string steht schon zur verfügung");
 	}
 	
         //noch zu bauen
-		sendJson(jsonString2,"updateIssue");
     }
     else {
     	event.preventDefault();
@@ -251,9 +252,9 @@ function loadIssueType(div, data){
 	$("#changeIssueDiv").load(tmpDiv, function(){
 		for(var i in aFields) {
 			if(aFields[i] == '_id'){
-				document.getElementById('issueID').value = aValues[i].$oid;
+				document.getElementById('_id').value = aValues[i].$oid;
 			} else {
-				if(aFields[i] != 'issueID'){
+				if(aFields[i] != '_id'){
 					document.getElementById(aFields[i]).value = aValues[i];	
 				}
 			}			
