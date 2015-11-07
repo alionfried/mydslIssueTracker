@@ -221,6 +221,35 @@ $(function () {
     });
 
 	addPersons();	 
+/*	
+    $( "#inputSearchAutosuggest" ).autocomplete({
+        source: function( request, response ) {
+          $.ajax({
+            url: "http://localhost:4567/search",
+            dataType: "jsonp",
+            data: {
+              q: request.term
+            },
+            success: function( data ) {
+              response( data );
+            }
+          });
+        },
+        minLength: 3,
+        select: function( event, ui ) {
+          log( ui.item ?
+            "Selected: " + ui.item.label :
+            "Nothing selected, input was " + this.value);
+        },
+        open: function() {
+          $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        },
+        close: function() {
+          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+        }
+      });
+    });
+*/
 });
 
 function getSelectedItemIssueTypes(){
@@ -251,16 +280,44 @@ function loadIssueType(div, data){
 	
 	$("#changeIssueDiv").load(tmpDiv, function(){
 		for(var i in aFields) {
+
 			if(aFields[i] == '_id'){
 				document.getElementById('_id').value = aValues[i].$oid;
 			} else {
 				if(aFields[i] != '_id'){
 					document.getElementById(aFields[i]).value = aValues[i];	
+				}				
+			}
+			
+			//JSON-ID sichern
+			if(aFields[i] == '_id'){ 
+				document.getElementById('_id').value = aValues[i].$oid;
+			}else {
+				if(aFields[i] != '_id'){
+					var tmpType = document.getElementById(aFields[i]).type; 
+					//Selected-Field
+					if(tmpType == 'select-one'){ 
+						var tmpSelect = document.getElementById(aFields[i]);
+/*						for (var iOption = 0 , iOption < document.getElementById(aFields[i]).length, iOption++){
+							if (document.getElementById(aFields[i]).item[iOption].value == aValues[i]) {
+								document.getElementById(aFields[i]).item[iOption].selected = true;
+								//document.getElementById(aFields[i]).selectedIndex = iOption + 1;
+							}
+						}
+*/					}else if (tmpType == 'checkbox'){
+						var tmpSel = document.getElementById(aFields[i]);
+						document.getElementById(aFields[i]).checked = true;
+					}
+					else {
+						document.getElementById(aFields[i]).value = aValues[i];	
+					}	
 				}
-			}			
+			} 
 		}
 	});
 }
+	
+	
 
 function loadIssueTypeStandard(div){
 	var tmpDiv = "individualInput.html #" + div;
