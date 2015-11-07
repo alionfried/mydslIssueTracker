@@ -43,7 +43,7 @@ $('#btnSelectChangeAssignee').change(function(){
 
 $('#btnListCreateIssues').change(function(){
     var sReturn = this.options[this.selectedIndex].value;    
-    (loadIssueType(sReturn));
+    (loadIssueTypeStandard(sReturn));
 });
 
 $("#aShow").click(function () {
@@ -106,9 +106,11 @@ $.ajax({
     data:searchTxt,
     dataType: 'json',
     success: function(data){
-        console.log("data:" + data.issueType);
-        (loadIssueType(data.issueType));
-        $("#statusField").text("defghi");
+        console.log("data:" + data.issueType);        
+    },
+    complete: function(data){
+        console.log("JSON Load OK");
+        loadIssueType(data.responseJSON.issueType, data);        
     },
     error: function(data){
         console.log("error");
@@ -167,11 +169,7 @@ function addPersons(){
 $("body").on("submit", function(event){
 	//var targetInformations = event.target;
 	//var formData = $(this).serializeObject();
-    //console.log($('#formSubmit').serializeArray());
-	
-	if($('#issueID').value == null){
-		alert('neuanlage');
-	}
+    //console.log($('#formSubmit').serializeArray());		
 	
     var json = $('#formSubmit').serializeJSON();
     var jsonString2 = JSON.stringify(json);
@@ -186,7 +184,15 @@ $("body").on("submit", function(event){
 	
 	alert( "Handler for .submit() called." );
 		
-	sendJson(jsonString2);
+	if(json.issueID == null){
+		alert('neuanlage');
+		sendJson(jsonString2);
+	}
+	else{
+		event.preventDefault();
+		alert("update funktion muss hier implementiert werden, der json string steht schon zur verfügung");
+	}
+	
         //noch zu bauen
     }
     else {
@@ -232,10 +238,28 @@ function getSelectedItemIssueTypes(){
                 i++;
         }
         selectedObject = returnObjekt.value;
-		(loadIssueType(selectedObject));		
+		(loadIssueTypeStandard(selectedObject));		
 }
 
-function loadIssueType(div){	
+function loadIssueType(div, data){	
+	var tmpDiv = "individualInput.html #" + div;
+	var aFields = $.map(data.responseJSON, function(value, key) { return key } );
+	var aValues = $.map(data.responseJSON, function(value, key) { return value } );
+	
+	$("#changeIssueDiv").load(tmpDiv, function(){
+		for(var i in aFields) {
+			if(aFields[i] == '_id'){
+				document.getElementById('issueID').value = aValues[i].$oid;
+			} else {
+				if(aFields[i] != 'issueID'){
+					document.getElementById(aFields[i]).value = aValues[i];	
+				}
+			}			
+		}
+	});
+}
+
+function loadIssueTypeStandard(div){
 	var tmpDiv = "individualInput.html #" + div;
 	$("#changeIssueDiv").load(tmpDiv);
 }
