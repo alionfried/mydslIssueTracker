@@ -28,7 +28,9 @@ public class MongoWrapper {
 	}
 	
 	public void updateDocumentInMongo(Document document, String collectionName){
-		Document filter = new Document("_id",document.getObjectId("_id"));
+		ObjectId objectId = new ObjectId(document.getString("_id"));
+		document.remove("_id");
+		Document filter = new Document ("_id",objectId);
 		System.out.println("Filter: " + filter.toString());
 		System.out.println(mongoDb.getCollection(collectionName).replaceOne(filter, document));
 	};

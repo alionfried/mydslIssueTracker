@@ -51,6 +51,7 @@ public class MyDslServer {
 			System.out.println("Writing to Mongo:" + formData.toString());
 			
 			Document formDataJson = Document.parse(formData);
+			formDataJson.remove("_id");
 			mongoWrapper.writeDocumentToMongo(formDataJson, "issues");
 			res.status(200);
 			return "";
