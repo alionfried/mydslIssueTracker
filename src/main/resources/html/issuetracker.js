@@ -2,13 +2,13 @@
 // 1 := onLoad / Ready  (Seite fertig gealden / Button Issue...
 // 2 := optionCreateNewIssue
 // 3 := btnChangeAssignee
-// 4 := btnShow
+// 4 := btnSearch
 
 var aDiv = [
-  ['mainDiv'             , true, true, true,true],
-  ['issueOverview'       , true, false, false,true],
+  ['mainDiv'             , true, true, true,false],
+  ['issueOverview'       , true, false, false,false],
   ['optionCreateNewIssue', false, true, false, false],
-  ['changeIssueDiv'      , false, true, false, false],
+  ['changeIssueDiv'      , false, true, false, true],
   ['optionChangeAssignee', false, false, true, false]
 ];
 
@@ -37,12 +37,12 @@ function checkpermission(personID,btnName) {
 
 $('#btnSelectChangeAssignee').change(function(){
     //var sReturn = this.options(this.selectedIndex).value;
-	var sReturn = this.options(this.selectedIndex).text;
+	var sReturn = this.options[this.selectedIndex].text;
     $("#navRigth").text(sReturn);
 });
 
 $('#btnListCreateIssues').change(function(){
-    var sReturn = this.options(this.selectedIndex).value;    
+    var sReturn = this.options[this.selectedIndex].value;    
     (loadIssueType(sReturn));
 });
 
@@ -106,7 +106,9 @@ $.ajax({
     data:searchTxt,
     dataType: 'json',
     success: function(data){
-        console.log("data:" + data.status);
+        console.log("data:" + data.issueType);
+        (loadIssueType(data.issueType));
+        $("#statusField").text("defghi");
     },
     error: function(data){
         console.log("error");
@@ -121,10 +123,12 @@ $('#btnSearchIssue').click(function () {
 	var btnName = "btnChangeAssignee";	
     getReturn = (checkpermission(personID,btnName));
     //getReturn = false;
-       
+    
+    einAusblendenDIV(4, 10);
     var inputSearch = $("#inputSearch");
-	var searchTxt = inputSearch[0].value;
+	var searchTxt = inputSearch[0].value;	
 	sendSearch(searchTxt);  
+	$("#statusField").text("defghi");
 });
 
 function addPersons(){
@@ -164,6 +168,10 @@ $("body").on("submit", function(event){
 	//var targetInformations = event.target;
 	//var formData = $(this).serializeObject();
     //console.log($('#formSubmit').serializeArray());
+	
+	if($('#issueID').value == null){
+		alert('neuanlage');
+	}
 	
     var json = $('#formSubmit').serializeJSON();
     var jsonString2 = JSON.stringify(json);
