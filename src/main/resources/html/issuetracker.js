@@ -298,17 +298,18 @@ function loadIssueType(div, data){
 					//Selected-Field
 					if(tmpType == 'select-one'){ 
 						var tmpSelect = document.getElementById(aFields[i]);
-/*						for (var iOption = 0 , iOption < document.getElementById(aFields[i]).length, iOption++){
-							if (document.getElementById(aFields[i]).item[iOption].value == aValues[i]) {
-								document.getElementById(aFields[i]).item[iOption].selected = true;
-								//document.getElementById(aFields[i]).selectedIndex = iOption + 1;
+						var length = document.getElementById(aFields[i]).length;
+						var iOption = 0;
+						while(iOption < length){							
+							if (document.getElementById(aFields[i]).options[iOption].value == aValues[i]) {								
+								document.getElementById(aFields[i]).options[iOption].selected = true;
 							}
-						}
-*/					}else if (tmpType == 'checkbox'){
+							iOption = iOption + 1;						
+						}						
+					}else if (tmpType == 'checkbox'){
 						var tmpSel = document.getElementById(aFields[i]);
-						document.getElementById(aFields[i]).checked = true;
-					}
-					else {
+						document.getElementById(aFields[i]).checked = true; 
+					}else {
 						document.getElementById(aFields[i]).value = aValues[i];	
 					}	
 				}

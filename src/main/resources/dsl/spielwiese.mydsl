@@ -54,6 +54,10 @@ Workflow workflowLang {
 	abgenommen_abgeschlossen
 }
 
+DateField createDate as "Erstelldatum"{
+	default today
+}
+
 DateField beginnDatum as "Beginndatum" {
 	default today
 }
@@ -148,7 +152,7 @@ IssueScreen issueScreen {
 
 	SummaryField beschreibung {
 	}
-	
+	createDate
 	beginnDatum
 	assignee
 }
