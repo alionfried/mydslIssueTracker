@@ -8,9 +8,11 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.eclipse.jetty.util.UrlEncoded;
 
 import com.mongodb.MongoClient;
+import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 
 public class MyDslServer {
 	public static void main(String[] args) {
@@ -46,10 +48,22 @@ public class MyDslServer {
 		
 		post("/submitIssue", (req, res) -> {
 			String formData=UrlEncoded.decodeString(req.body());
-			System.out.println(formData.toString());
+			System.out.println("Writing to Mongo:" + formData.toString());
 			
 			Document formDataJson = Document.parse(formData);
 			mongoWrapper.writeDocumentToMongo(formDataJson, "issues");
+			res.status(200);
+			return "";
+		});
+		
+		post("/updateIssue", (req, res) -> {
+			String formData=UrlEncoded.decodeString(req.body());
+			System.out.println("Updateing in Mongo:" + formData.toString());
+			
+			Document formDataJson = Document.parse(formData);
+			//entfernen wenn ObjectId in post enthalten
+			formDataJson.put("_id",new ObjectId("563d25ed782d2b35604da572"));
+			mongoWrapper.updateDocumentInMongo(formDataJson, "issues");
 			res.status(200);
 			return "";
 		});

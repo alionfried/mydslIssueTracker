@@ -82,12 +82,12 @@ $('#btnChangeAssignee').click(function () {
     }
 });
 
-function sendJson(json){
+function sendJson(json, target){
 $.ajax
     ({
         type: "POST",
         //the url where you want to sent the userName and password to
-        url: 'http://localhost:4567/submitIssue',
+        url: 'http://localhost:4567/'+ target,
         dataType: 'json',
         async: false,
         //json object to sent to the authentication url
@@ -186,7 +186,8 @@ $("body").on("submit", function(event){
 		
 	if(json.issueID == null){
 		alert('neuanlage');
-		sendJson(jsonString2);
+		//sendJson(jsonString2,"submitIssue");
+		sendJson(jsonString2,"updateIssue");
 	}
 	else{
 		event.preventDefault();
@@ -194,6 +195,7 @@ $("body").on("submit", function(event){
 	}
 	
         //noch zu bauen
+		sendJson(jsonString2,"updateIssue");
     }
     else {
     	event.preventDefault();

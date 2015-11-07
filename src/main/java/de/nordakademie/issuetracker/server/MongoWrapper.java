@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import java.util.regex.Pattern;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
@@ -25,6 +26,12 @@ public class MongoWrapper {
 	public void writeDocumentToMongo(Document document, String collectionName){
 		mongoDb.getCollection(collectionName).insertOne(document);
 	}
+	
+	public void updateDocumentInMongo(Document document, String collectionName){
+		Document filter = new Document("_id",document.getObjectId("_id"));
+		System.out.println("Filter: " + filter.toString());
+		System.out.println(mongoDb.getCollection(collectionName).replaceOne(filter, document));
+	};
 	
 	public Document searchInMongo(String searchTerm, String collectionName){
 		BasicDBObject query = new BasicDBObject();
