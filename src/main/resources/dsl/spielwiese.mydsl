@@ -67,7 +67,7 @@ DateField endeDatum as "Enddatum" {
 }
 
 MailField kontakt as "Kontaktmail" {
-	default "barbapapa4@TRAUM.De"
+	default "Barbapapa4@TRAUM.De"
 }
 
 ComboField prio as "Priorität" {

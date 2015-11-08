@@ -1,5 +1,5 @@
 {"issueTypes":[{
-	"issueName" : "bug",
+	"issueType" : "bug",
 	"workflow":{
 		"workflowName":"workflowKurz",
 		"workflowTransitions":[

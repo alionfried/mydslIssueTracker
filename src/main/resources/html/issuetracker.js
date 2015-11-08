@@ -52,6 +52,19 @@ $("#aShow").click(function () {
 });
 
 $("#btnCreateNewIssue").click(function () {
+	var sReturn = $("#optionCreateNewIssue option");    
+    var length = sReturn.length;
+    
+    //to be sure that the issuetypes have default values
+    if(length > 1){
+    	sReturn[1].selected = true;
+    	(loadIssueTypeStandard(sReturn[1].value));
+    	alert("1");
+    	sReturn[0].selected = true;
+    	(loadIssueTypeStandard(sReturn[0].value));
+    	alert("0");
+    }	   
+	
     var navRigth = $("#navRigth");
 	var personID = navRigth[0].text;
 	var btnName = "btnChangeAssignee";	
@@ -61,8 +74,7 @@ $("#btnCreateNewIssue").click(function () {
     }
     else {
         alertNoPermission();
-    }    
-        	
+    }            	
 });
 
 function alertNoPermission(){
