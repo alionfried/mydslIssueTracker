@@ -41,10 +41,10 @@ public class MongoInitializer {
 	@SuppressWarnings("unchecked")
 	private static void fillTicketDB(MongoDatabase db){
 		new JsonFileReader();
-		Document persons = Document.parse(JsonFileReader.readJsonFromFile("src/main/resources/json/person.json"));
+		Document persons = Document.parse(JsonFileReader.readJsonFromFile("src/main/resources/html/person.json"));
 		db.getCollection("persons").insertMany((ArrayList<? extends Document>) persons.get("persons"));
 		
-		Document issueTypes = Document.parse(JsonFileReader.readJsonFromFile("src/main/resources/json/issueTypes.json"));
+		Document issueTypes = Document.parse(JsonFileReader.readJsonFromFile("src/main/resources/html/issueTypes.json"));
 		db.getCollection("issueTypes").insertMany((ArrayList<? extends Document>) issueTypes.get("issueTypes"));
 
 	}
