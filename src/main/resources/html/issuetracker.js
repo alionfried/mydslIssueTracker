@@ -52,6 +52,11 @@ $("#aShow").click(function () {
 });
 
 $("#btnCreateNewIssue").click(function () {
+	var sOption = $("#optionChangeAssignee option");
+	for(var i = 0; i < sOption.length; i++){
+		alert(i);
+	}
+	
 	var sReturn = $("#optionCreateNewIssue option");    
     var length = sReturn.length;
     
@@ -147,10 +152,8 @@ function addPersons(){
     var persons = data;
     for (var i = 0; i < persons.length; i++) {
     	var personid = persons[i]._id.$oid;
-		var surname = persons[i].surname;
-		var forename = persons[i].forename;
-		var personFullName = forename + " " + surname;
-    	var myOpt = '<option value=' + personid + ' >' + personFullName + '</option>';    	
+		var showname = persons[i].shownName;
+    	var myOpt = '<option value=' + personid + ' >' + showname + '</option>';    	
 		$("#btnSelectChangeAssignee").append(myOpt);	
     }
     var sReturn = $("#optionChangeAssignee option");    
