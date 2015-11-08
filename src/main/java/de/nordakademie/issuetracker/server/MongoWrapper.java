@@ -1,11 +1,6 @@
 package de.nordakademie.issuetracker.server;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import org.bson.Document;
@@ -62,28 +57,10 @@ public class MongoWrapper {
 	}
 
 	public String collectionToJsonArray(MongoCollection<Document> collection) {
-		StringWriter sw = new StringWriter();
-		BufferedWriter writer = new BufferedWriter(sw);
-		try {
-			try {
-				writer.write("[");
-				writer.newLine();
-				int counter = 1;
-				for (Document doc : collection.find()) {
-					writer.write(doc.toJson());
-					if (counter<collection.count()){
-						writer.write(",");
-					}
-					writer.newLine();
-					counter++;
-				}
-				writer.write("]");
-			} finally {
-				writer.close();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return sw.toString();
+		ArrayList<String> documentsArray = new ArrayList<String>();
+		   for (Document doc : collection.find()){
+			   documentsArray.add(doc.toJson());
+		   }
+		   return documentsArray.toString();		
 	}
 }
