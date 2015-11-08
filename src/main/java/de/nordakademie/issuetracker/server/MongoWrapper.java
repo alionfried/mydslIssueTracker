@@ -47,7 +47,7 @@ public class MongoWrapper {
 	}
 	
 	public ArrayList<String> getLatestIssues(String collectionName){
-	   Iterable<Document> documents = mongoDb.getCollection(collectionName).find().limit(10).sort(new Document("_id",1));
+	   Iterable<Document> documents = mongoDb.getCollection(collectionName).find().limit(10).sort(new Document("_id",-1));
 	   ArrayList<String> documentsArray = new ArrayList<String>();
 	   for (Document doc : documents){
 		   documentsArray.add(doc.toJson());
