@@ -1,35 +1,35 @@
 {"issueTypes":[{
-	"issueType" : "bug",
+	"issueName" : "bug",
 	"workflow":{
 		"workflowName":"workflowKurz",
-		"workflowSteps":[
+		"workflowTransitions":[
 		{
-			"stepName":"offen_inBearbeitung",
+			"transitionName":"offen_inBearbeitung",
 		 	"from":"offen",
 		 	"to":"inBerabeitung"
 		},
 		{
-			"stepName":"offen_zurueckgezogen",
+			"transitionName":"offen_zurueckgezogen",
 		 	"from":"offen",
 		 	"to":"zurueckgezogen"
 		},
 		{
-			"stepName":"inBearbeitung_zuTesten",
+			"transitionName":"inBearbeitung_zuTesten",
 		 	"from":"inBearbeitung",
 		 	"to":"zuTesten"
 		}, 
 		{
-			"stepName":"inBearbeitung_zurueckgezogen",
+			"transitionName":"inBearbeitung_zurueckgezogen",
 		 	"from":"inBearbeitung",
 		 	"to":"zurueckgezogen"
 		},
 		{	
-			"stepName":"zuTesten_inBearbeitung",
+			"transitionName":"zuTesten_inBearbeitung",
 		 	"from":"zuTesten",
 		 	"to":"inBerabeitung"
 		}, 
 		{	
-			"stepName":"zuTesten_abgeschlossen",
+			"transitionName":"zuTesten_abgeschlossen",
 		 	"from":"zuTesten",
 		 	"to":"abgeschlossen"
 		}
@@ -39,39 +39,39 @@
 	"issueType" : "issue",
 	"workflow":{
 		"workflowName":"workflowLang",
-		"workflowSteps":[
+		"workflowTransitions":[
 		{
-			"stepName":"offen_inBearbeitung",
+			"transitionName":"offen_inBearbeitung",
 		 	"from":"offen",
 		 	"to":"inBearbeitung"
 		}, 
 		{
-			"stepName":"offen_zurueckgezogen",
+			"transitionName":"offen_zurueckgezogen",
 		 	"from":"offen",
 		 	"to":"zurueckgezogen"
 		}, 
 		{
-			"stepName":"inBearbeitung_zuTesten",
+			"transitionName":"inBearbeitung_zuTesten",
 		 	"from":"inBearbeitung",
 		 	"to":"zuTesten"
 		},
 		{
-			"stepName":"inBearbeitung_zurueckgezogen",
+			"transitionName":"inBearbeitung_zurueckgezogen",
 		 	"from":"inBearbeitung",
 		 	"to":"zurueckgezogen"
 		},
 		{
-			"stepName":"zuTesten_inBearbeitung",
+			"transitionName":"zuTesten_inBearbeitung",
 		 	"from":"zuTesten",
 		 	"to":"inBearbeitung"
 		}, 
 		{
-			"stepName":"zuTesten_abgenommen",
+			"transitionName":"zuTesten_abgenommen",
 		 	"from":"zuTesten",
 		 	"to":"abgenommen"
 		}, 
 		{
-			"stepName":"abgenommen_abgeschlossen",
+			"transitionName":"abgenommen_abgeschlossen",
 		 	"from":"abgenommen",
 		 	"to":"abgeschlossen"}
 		]}
