@@ -107,7 +107,7 @@
 	"roles" :[
 	{
 		"roleName":"admin",
-		"openIssue" : false,
+		"openIssue" : true,
 		"roleTransitions":[
 		{
 			"transitionName":"abgenommen_abgeschlossen",

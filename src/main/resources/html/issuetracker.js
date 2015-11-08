@@ -53,29 +53,56 @@ $("#aShow").click(function () {
 
 $("#btnCreateNewIssue").click(function () {
 	var sOption = $("#optionChangeAssignee option");
-	for(var i = 0; i < sOption.length; i++){
-		alert(i);
+	var actPerson;
+	var findPersonRole;
+	var findPerson = false;
+	var i = 0;
+	while(i < sOption.length && findPerson == false){
+		if(sOption[i].selected == true){
+			actPerson = sOption[i];
+			findperson = true;
+		}
+		i++;
 	}
 	
-	var sReturn = $("#optionCreateNewIssue option");    
-    var length = sReturn.length;
-    
-    //to be sure that the issuetypes have default values
-    if(length > 1){    	
-    	(loadIssueTypeStandard(sReturn[1].value));    	    	
-    	(loadIssueTypeStandard(sReturn[0].value));
-    }	   
-	
-    var navRigth = $("#navRigth");
-	var personID = navRigth[0].text;
-	var btnName = "btnChangeAssignee";	
-    getReturn = (checkpermission(personID,btnName));    
-    if (getReturn == true) {       
-        einAusblendenDIV(2, 1000);
-    }
-    else {
-        alertNoPermission();
-    }            	
+	$.get( "http://localhost:4567/getPersonsFromDb", function( data ) {
+	    var n = 0;
+	    var personGet = false;
+		while(n < data.length && personGet == false){
+			alert(data[n]._id.$oid);
+			alert(actPerson.value);
+			if(data[n]._id.$oid == actPerson.value){
+				alert("find");
+				personGet = true;
+				findPersonRole = data[n];
+			}
+			n++;
+		}		
+		
+		var permissionForCreateIssue = false;
+		for(var z = 0; z < findPersonRole.roles.length; z++){
+			if(findPersonRole.roles[z].openIssue == true){
+				permissionForCreateIssue = true;
+			}				
+		}
+		
+		//to be sure that the issuetypes have default values
+		var sReturn = $("#optionCreateNewIssue option");    
+	    var length = sReturn.length;	    	    
+	    if(length > 1){    	
+	    	(loadIssueTypeStandard(sReturn[1].value));    	    	
+	    	(loadIssueTypeStandard(sReturn[0].value));
+	    }	   
+			       
+	    if (permissionForCreateIssue == true) {       
+	        einAusblendenDIV(2, 1000);
+	    }
+	    else {
+	        alertNoPermission();
+	    }   
+		
+	});	
+         	
 });
 
 function alertNoPermission(){

@@ -105,6 +105,7 @@ Role anforderer {
 }
 
 Role admin {
+	create Issue
 	abgenommen_abgeschlossen
 	inBearbeitung_abgeschlossen
 	inBearbeitung_zurueckgezogen
@@ -117,7 +118,7 @@ Role admin {
 }
 
 Person P000123 called "Johnnie"{
-	anforderer
+	anforderer	
 }
 
 Person P009876 called "Jim"{
