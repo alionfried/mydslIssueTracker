@@ -3,6 +3,9 @@ package de.nordakademie.issuetracker.server;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.bson.Document;
@@ -42,6 +45,16 @@ public class MongoWrapper {
 		System.out.println(issue);
 		return issue;		
 	}
+	
+	public ArrayList<String> getLatestIssues(String collectionName){
+	   Iterable<Document> documents = mongoDb.getCollection(collectionName).find().limit(10).sort(new Document("_id",1));
+	   ArrayList<String> documentsArray = new ArrayList<String>();
+	   for (Document doc : documents){
+		   documentsArray.add(doc.toJson());
+	   }
+	   System.out.println(documentsArray);
+	   return documentsArray;
+	};
 
 	public String getFullCollectionAsJson(String collectionName){
 		MongoCollection<Document> collection = (MongoCollection<Document>) mongoDb.getCollection(collectionName);

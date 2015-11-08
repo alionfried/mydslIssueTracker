@@ -39,6 +39,11 @@ public class MyDslServer {
 			return mongoWrapper.getFullCollectionAsJson("issueTypes");
 		});
 		
+		get("/getLatestIssues", (req, res) -> {
+			res.type("application/json");
+			return mongoWrapper.getLatestIssues("issues");
+		});
+		
 		
 		get("/getPersonsFromDb", (req, res) -> {
 			res.type("application/json");

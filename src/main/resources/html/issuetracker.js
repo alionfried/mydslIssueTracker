@@ -129,7 +129,10 @@ $('#btnSearchIssue').click(function () {
     einAusblendenDIV(4, 10);
     var inputSearch = $("#inputSearch");
 	var searchTxt = inputSearch[0].value;	
-	sendSearch(searchTxt);  
+	//sendSearch(searchTxt);  
+	$.get( "http://localhost:4567/getLatestIssues", function( data ){
+		console.log(data)
+	});
 	$("#statusField").text("defghi");
 });
 
