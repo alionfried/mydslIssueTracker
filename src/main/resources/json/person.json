@@ -1,9 +1,10 @@
 {"persons":[{
-	"surname" : "Maiser",
-   	"forename" : "Hans",
+	"personName" : "P000123"
+	"shownName" : "John Doe",
 	"roles" :[
 		{"roleName":"admin",
-		"allowedTransitions":[
+		"openIssue" : null
+		"roleTransitions":[
 		 	{
 		 		"transitionName":"abgenommen_abgeschlossen",
 		 		"from":"abgenommen",
@@ -51,7 +52,8 @@
 		 	}
 		 ]},
 		{"roleName":"bearbeiter",
-		 "allowedTransitions":[
+		 "openIssue" : null
+		 "roleTransitions":[
 		 	{
 		 		"transitionName":"offen_inBearbeitung",
 		 		"from":"offen",
@@ -70,11 +72,12 @@
 		]
 },
 {
-	"surname" : "Muster",
-	"forename" : "Max",
+	"personName" : "P009876"
+	"shownName" : "Jim",
 	"roles" :[
 		{"roleName":"anforderer",
-		 "allowedTransitions":[
+		 "openIssue" : true
+		 "roleTransitions":[
 		 	{
 		 		"transitionName":"create Issue",
 		 		"from":"",
@@ -92,7 +95,8 @@
 		 	}
 		 ]},
 		{"roleName":"admin",
-		"allowedTransitions":[
+		"openIssue" : null
+		"roleTransitions":[
 		 	{
 		 		"transitionName":"abgenommen_abgeschlossen",
 		 		"from":"abgenommen",
