@@ -72,12 +72,19 @@ public class MyDslServer {
 			return "";
 		});
 		
+		post("/searchSuggest", (req, res) -> {
+			String formData=UrlEncoded.decodeString(req.body());
+			String issues = mongoWrapper.searchAllInMongo(formData.toString(), "issues");
+			res.type("application/json");
+			System.out.println(issues);
+			return issues;
+		});
+		
+		
 		post("/search", (req, res) -> {
 			String formData=UrlEncoded.decodeString(req.body());
-			Document issue = mongoWrapper.searchInMongo(formData.toString(), "issues");
+			Document issue = mongoWrapper.searchOneInMongo(formData.toString(), "issues");
 			res.type("application/json");
-			res.status(200);
-			System.out.println(res);
 			return issue.toJson();
 		});
 	}

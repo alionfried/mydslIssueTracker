@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
@@ -33,7 +34,20 @@ public class MongoWrapper {
 		System.out.println(mongoDb.getCollection(collectionName).replaceOne(filter, document));
 	};
 	
-	public Document searchInMongo(String searchTerm, String collectionName){
+	public String searchAllInMongo(String searchTerm, String collectionName){
+		BasicDBObject query = new BasicDBObject();
+		ArrayList<String> documentsArray = new ArrayList<String>();
+		
+		query.put("summary",  java.util.regex.Pattern.compile(".*"+searchTerm+".*", Pattern.CASE_INSENSITIVE));
+		FindIterable<Document> issues = mongoDb.getCollection(collectionName).find(query);
+		
+		for (Document issue : issues){
+			   documentsArray.add(issue.toJson());
+		   }
+		return documentsArray.toString();		
+	}
+	
+	public Document searchOneInMongo(String searchTerm, String collectionName){
 		BasicDBObject query = new BasicDBObject();
 		query.put("summary",  java.util.regex.Pattern.compile(".*"+searchTerm+".*", Pattern.CASE_INSENSITIVE));
 		Document issue = mongoDb.getCollection(collectionName).find(query).first();
