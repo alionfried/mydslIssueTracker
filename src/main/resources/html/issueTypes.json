@@ -1,0 +1,95 @@
+{"issueTypes":[
+{
+	"issueName" : "bug",
+	"workflow":{
+		"workflowName":"workflowKurz",
+		"workflowTransitions":[
+		{
+			"transitionName":"offen_inBearbeitung",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@702ac96b (name: offen)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@6e30a80e (name: inBearbeitung)"
+		}
+		,
+		{
+			"transitionName":"offen_zurueckgezogen",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@702ac96b (name: offen)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@16705fe3 (name: zurueckgezogen)"
+		}
+		,
+		{
+			"transitionName":"inBearbeitung_zuTesten",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@6e30a80e (name: inBearbeitung)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@63c81e4b (name: zuTesten)"
+		}
+		,
+		{
+			"transitionName":"inBearbeitung_zurueckgezogen",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@6e30a80e (name: inBearbeitung)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@16705fe3 (name: zurueckgezogen)"
+		}
+		,
+		{
+			"transitionName":"zuTesten_inBearbeitung",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@63c81e4b (name: zuTesten)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@6e30a80e (name: inBearbeitung)"
+		}
+		,
+		{
+			"transitionName":"zuTesten_abgeschlossen",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@63c81e4b (name: zuTesten)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@7debf888 (name: abgeschlossen)"
+		}
+		]
+	}
+}
+,
+{
+	"issueName" : "issue",
+	"workflow":{
+		"workflowName":"workflowLang",
+		"workflowTransitions":[
+		{
+			"transitionName":"offen_inBearbeitung",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@702ac96b (name: offen)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@6e30a80e (name: inBearbeitung)"
+		}
+		,
+		{
+			"transitionName":"offen_zurueckgezogen",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@702ac96b (name: offen)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@16705fe3 (name: zurueckgezogen)"
+		}
+		,
+		{
+			"transitionName":"inBearbeitung_zuTesten",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@6e30a80e (name: inBearbeitung)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@63c81e4b (name: zuTesten)"
+		}
+		,
+		{
+			"transitionName":"inBearbeitung_zurueckgezogen",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@6e30a80e (name: inBearbeitung)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@16705fe3 (name: zurueckgezogen)"
+		}
+		,
+		{
+			"transitionName":"zuTesten_inBearbeitung",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@63c81e4b (name: zuTesten)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@6e30a80e (name: inBearbeitung)"
+		}
+		,
+		{
+			"transitionName":"zuTesten_abgenommen",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@63c81e4b (name: zuTesten)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@5bac0307 (name: abgenommen)"
+		}
+		,
+		{
+			"transitionName":"abgenommen_abgeschlossen",
+		 	"from":"de.nordakademie.ticket.ticket.impl.StatusImpl@5bac0307 (name: abgenommen)",
+		 	"to":"de.nordakademie.ticket.ticket.impl.StatusImpl@7debf888 (name: abgeschlossen)"
+		}
+		]
+	}
+}
+]}
