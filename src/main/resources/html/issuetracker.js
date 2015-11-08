@@ -185,12 +185,14 @@ $("body").on("submit", function(event){
 		
 	if(json._id == "null"){
 		alert('neuanlage');
-		sendJson(jsonString2,"submitIssue");		
+		sendJson(jsonString2,"submitIssue");
+		location.reload();
 	}
 	else{
 //		event.preventDefault();
 		alert('update')
 		sendJson(jsonString2,"updateIssue");
+		location.reload();
 	}
 	
         //noch zu bauen
@@ -257,8 +259,7 @@ $(function () {
 
 function drawTable(data) {
     for (var i = 0; i < data.length; i++) {
-        drawRow(data[i]);
-    	var dataI = data[i];
+        drawRow(data[i]);    	
     }
 }
 
