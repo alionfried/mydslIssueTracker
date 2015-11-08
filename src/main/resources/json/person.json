@@ -1,9 +1,9 @@
 {"persons":[{
-	"personName" : "P000123"
+	"personName" : "P000123",
 	"shownName" : "John Doe",
 	"roles" :[
 		{"roleName":"admin",
-		"openIssue" : null
+		"openIssue" : null,
 		"roleTransitions":[
 		 	{
 		 		"transitionName":"abgenommen_abgeschlossen",
@@ -52,7 +52,7 @@
 		 	}
 		 ]},
 		{"roleName":"bearbeiter",
-		 "openIssue" : null
+		 "openIssue" : null,
 		 "roleTransitions":[
 		 	{
 		 		"transitionName":"offen_inBearbeitung",
@@ -72,11 +72,11 @@
 		]
 },
 {
-	"personName" : "P009876"
+	"personName" : "P009876",
 	"shownName" : "Jim",
 	"roles" :[
 		{"roleName":"anforderer",
-		 "openIssue" : true
+		 "openIssue" : true,
 		 "roleTransitions":[
 		 	{
 		 		"transitionName":"create Issue",
@@ -95,7 +95,7 @@
 		 	}
 		 ]},
 		{"roleName":"admin",
-		"openIssue" : null
+		"openIssue" : null,
 		"roleTransitions":[
 		 	{
 		 		"transitionName":"abgenommen_abgeschlossen",
