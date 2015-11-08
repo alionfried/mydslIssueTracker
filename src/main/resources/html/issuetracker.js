@@ -130,10 +130,7 @@ $('#btnSearchIssue').click(function () {
     var inputSearch = $("#inputSearch");
 	var searchTxt = inputSearch[0].value;	
 	//sendSearch(searchTxt);  
-	$.get( "http://localhost:4567/getLatestIssues", function( data ){
-		console.log(data)
-	});
-	$("#statusField").text("defghi");
+
 });
 
 function addPersons(){
@@ -222,6 +219,12 @@ $(function () {
     
    		var lReturn = getSelectedItemIssueTypes();           
     });
+    
+	$.get( "http://localhost:4567/getLatestIssues", function( data ){
+		var issues = data;
+		console.log(data);
+		drawTable(issues);
+	});
 
 	addPersons();	 
 /*	
@@ -254,6 +257,22 @@ $(function () {
     });
 */
 });
+
+function drawTable(data) {
+    for (var i = 0; i < data.length; i++) {
+        drawRow(data[i]);
+    	var dataI = data[i];
+    }
+}
+
+function drawRow(rowData) {
+    var row = $("<tr />")
+    $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+    row.append($("<td>" + rowData._id.$oid + "</td>"));
+    row.append($("<td>" + rowData.issueType + "</td>"));
+    row.append($("<td>" + rowData.status + "</td>"));
+    row.append($("<td>" + rowData.summary + "</td>"));
+}
 
 function getSelectedItemIssueTypes(){
 	 var sReturn;
