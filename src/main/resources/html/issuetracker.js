@@ -56,13 +56,9 @@ $("#btnCreateNewIssue").click(function () {
     var length = sReturn.length;
     
     //to be sure that the issuetypes have default values
-    if(length > 1){
-    	sReturn[1].selected = true;
-    	(loadIssueTypeStandard(sReturn[1].value));
-    	alert("1");
-    	sReturn[0].selected = true;
+    if(length > 1){    	
+    	(loadIssueTypeStandard(sReturn[1].value));    	    	
     	(loadIssueTypeStandard(sReturn[0].value));
-    	alert("0");
     }	   
 	
     var navRigth = $("#navRigth");
