@@ -1,6 +1,27 @@
 {"issueTypes":[{
-	"issueType" : "bug"
+	"issueType" : "bug",
+	"workflow":{
+		"workflowName":"workflowKurz",
+		"workflowSteps":[
+		{"stepName":"offen_inBearbeitung"},
+		{"stepName":"offen_zurueckgezogen"},
+		{"stepName":"inBearbeitung_zuTesten"}, 
+		{"stepName":"inBearbeitung_zurueckgezogen"},
+		{"stepName":"zuTesten_inBearbeitung"}, 
+		{"stepName":"zuTesten_abgeschlossen"}
+		]}
 },
 {
-	"issueType" : "story"
+	"issueType" : "issue",
+	"workflow":{
+		"workflowName":"workflowLang",
+		"workflowSteps":[
+		{"stepName":"offen_inBearbeitung"}, 
+		{"stepName":"offen_zurueckgezogen"}, 
+		{"stepName":"inBearbeitung_zuTesten"},
+		{"stepName":"inBearbeitung_zurueckgezogen"},
+		{"stepName":"zuTesten_inBearbeitung"}, 
+		{"stepName":"zuTesten_abgenommen"}, 
+		{"stepName":"abgenommen_abgeschlossen"}
+		]}
 }]}

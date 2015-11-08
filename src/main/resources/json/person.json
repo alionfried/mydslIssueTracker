@@ -1,10 +1,49 @@
 {"persons":[{
 	"surname" : "Maiser",
    	"forename" : "Hans",
-	"role" : "admin"
+	"roles" :[
+		{"roleName":"admin",
+		"allowedTransitions":[
+		 	{"transitionName":"abgenommen_abgeschlossen"},
+			{"transitionName":"inBearbeitung_abgeschlossen"},
+			{"transitionName":"inBearbeitung_zurueckgezogen"},
+			{"transitionName":"inBearbeitung_zuTesten"},
+			{"transitionName":"offen_inBearbeitung"},
+			{"transitionName":"offen_zurueckgezogen"},
+			{"transitionName":"zuTesten_abgenommen"},
+			{"transitionName":"zuTesten_abgeschlossen"},
+			{"transitionName":"zuTesten_inBearbeitung"}
+		 ]},
+		{"roleName":"bearbeiter",
+		 "allowedTransitions":[
+		 	{"transitionName":"offen_inBearbeitung"},	
+		 	{"transitionName":"inBearbeitung_zuTesten"},
+		 	{"transitionName":"zuTesten_inBearbeitung"}
+		 ]}
+		]
 },
 {
 	"surname" : "Muster",
 	"forename" : "Max",
-	"role" : "developer"
-}]}
+	"roles" :[
+		{"roleName":"anforderer",
+		 "allowedTransitions":[
+		 	{"transitionName":"create Issue"},	
+		 	{"transitionName":"inBearbeitung_zurueckgezogen"},
+		 	{"transitionName":"offen_zurueckgezogen"}
+		 ]},
+		{"roleName":"admin",
+		"allowedTransitions":[
+		 	{"transitionName":"abgenommen_abgeschlossen"},
+			{"transitionName":"inBearbeitung_abgeschlossen"},
+			{"transitionName":"inBearbeitung_zurueckgezogen"},
+			{"transitionName":"inBearbeitung_zuTesten"},
+			{"transitionName":"offen_inBearbeitung"},
+			{"transitionName":"offen_zurueckgezogen"},
+			{"transitionName":"zuTesten_abgenommen"},
+			{"transitionName":"zuTesten_abgeschlossen"},
+			{"transitionName":"zuTesten_inBearbeitung"}
+		 ]}
+		]}
+	]
+} 
