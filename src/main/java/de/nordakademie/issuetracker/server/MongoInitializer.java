@@ -1,7 +1,5 @@
 package de.nordakademie.issuetracker.server;
 
-import static de.nordakademie.issuetracker.server.DataJson.*;
-
 import java.util.ArrayList;
 
 import org.bson.Document;
@@ -9,6 +7,8 @@ import org.bson.Document;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCommandException;
 import com.mongodb.client.MongoDatabase;
+
+import json.JsonFileReader;
 
 public class MongoInitializer {
 	
@@ -40,10 +40,11 @@ public class MongoInitializer {
 	
 	@SuppressWarnings("unchecked")
 	private static void fillTicketDB(MongoDatabase db){
-		Document persons = Document.parse(PERSONS_JSON);
+		new JsonFileReader();
+		Document persons = Document.parse(JsonFileReader.readJsonFromFile("src/main/resources/json/person.json"));
 		db.getCollection("persons").insertMany((ArrayList<? extends Document>) persons.get("persons"));
 		
-		Document issueTypes = Document.parse(ISSUETYPES_JSON);
+		Document issueTypes = Document.parse(JsonFileReader.readJsonFromFile("src/main/resources/json/issueTypes.json"));
 		db.getCollection("issueTypes").insertMany((ArrayList<? extends Document>) issueTypes.get("issueTypes"));
 
 	}

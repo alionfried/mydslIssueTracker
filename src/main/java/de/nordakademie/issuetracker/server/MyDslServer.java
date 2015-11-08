@@ -8,11 +8,9 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 import org.eclipse.jetty.util.UrlEncoded;
 
 import com.mongodb.MongoClient;
-import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 
 public class MyDslServer {
 	public static void main(String[] args) {
@@ -91,6 +89,9 @@ public class MyDslServer {
 	private static String getString(InputStream is) {
 		try(java.util.Scanner s = new Scanner(is).useDelimiter("\\A")){			
 			return s.hasNext() ? s.next() : "";
+		}catch (Exception e) {
+			System.out.println("file not found");
+			return "";
 		}
 	}
 }

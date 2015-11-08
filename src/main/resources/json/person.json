@@ -1,0 +1,10 @@
+{"persons":[{
+	"surname" : "Maiser",
+   	"forename" : "Hans",
+	"role" : "admin"
+},
+{
+	"surname" : "Muster",
+	"forename" : "Max",
+	"role" : "developer"
+}]}
