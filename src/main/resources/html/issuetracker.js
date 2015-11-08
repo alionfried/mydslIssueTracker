@@ -129,8 +129,7 @@ $('#btnSearchIssue').click(function () {
     einAusblendenDIV(4, 10);
     var inputSearch = $("#inputSearch");
 	var searchTxt = inputSearch[0].value;	
-	//sendSearch(searchTxt);  
-
+	sendSearch(searchTxt);  
 });
 
 function addPersons(){
@@ -186,14 +185,12 @@ $("body").on("submit", function(event){
 		
 	if(json._id == "null"){
 		alert('neuanlage');
-		sendJson(jsonString2,"submitIssue");
-		//sendJson(jsonString2,"updateIssue");
+		sendJson(jsonString2,"submitIssue");		
 	}
 	else{
 //		event.preventDefault();
 		alert('update')
 		sendJson(jsonString2,"updateIssue");
-		//alert("update funktion muss hier implementiert werden, der json string steht schon zur verfügung");
 	}
 	
         //noch zu bauen

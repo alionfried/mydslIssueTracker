@@ -35,7 +35,7 @@ public class MongoWrapper {
 	
 	public Document searchInMongo(String searchTerm, String collectionName){
 		BasicDBObject query = new BasicDBObject();
-		query.put("beschreibung",  java.util.regex.Pattern.compile(".*"+searchTerm+".*", Pattern.CASE_INSENSITIVE));
+		query.put("summary",  java.util.regex.Pattern.compile(".*"+searchTerm+".*", Pattern.CASE_INSENSITIVE));
 		Document issue = mongoDb.getCollection(collectionName).find(query).first();
 		System.out.println(issue);
 		return issue;		
