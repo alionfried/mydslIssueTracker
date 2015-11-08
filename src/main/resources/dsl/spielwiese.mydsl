@@ -63,11 +63,11 @@ DateField beginnDatum as "Beginndatum" {
 }
 
 DateField endeDatum as "Enddatum" {
-	default 31 . 12 . 9999
+	default 31.12.9999
 }
 
 MailField kontakt as "Kontaktmail" {
-	default <barbapapa4@TRAUM.De>
+	default "barbapapa4@TRAUM.De"
 }
 
 ComboField prio as "Priorität" {
@@ -77,9 +77,6 @@ ComboField prio as "Priorität" {
 StringField field as "test" {
 	default "Default"	
 }
-StringField field as "test" {	
-}
-
 
 CheckField checkBetriebsrat as "Betriebsrat" {
 	default FALSE
