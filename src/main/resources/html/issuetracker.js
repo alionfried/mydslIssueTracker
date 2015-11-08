@@ -3,13 +3,14 @@
 // 2 := optionCreateNewIssue
 // 3 := btnChangeAssignee
 // 4 := btnSearch
+// 5 := autocomplete
 
 var aDiv = [
-  ['mainDiv'             , true, true, true,false],
-  ['issueOverview'       , true, false, false,false],
-  ['optionCreateNewIssue', false, true, false, false],
-  ['changeIssueDiv'      , false, true, false, true],
-  ['optionChangeAssignee', false, false, true, false]
+  ['mainDiv'             , true, true, true, false, false],
+  ['issueOverview'       , true, false, false, false, false],
+  ['optionCreateNewIssue', false, true, false, false, false],
+  ['changeIssueDiv'      , false, true, false, true, false],
+  ['optionChangeAssignee', false, false, true, false, false]
 ];
 
 function einAusblendenDIV(nStatus, nTime) {
@@ -127,7 +128,7 @@ $('#btnSearchIssue').click(function () {
     //getReturn = false;
     
     einAusblendenDIV(4, 10);
-    var inputSearch = $("#inputSearch");
+    var inputSearch = $("#inputSearchAutosuggest");
 	var searchTxt = inputSearch[0].value;	
 	sendSearch(searchTxt);  
 });
@@ -223,39 +224,44 @@ $(function () {
 		var issues = data;
 		console.log(data);
 		drawTable(issues);
+		autocomplete(issues);		
 	});
 
 	addPersons();	 
-/*	
-    $( "#inputSearchAutosuggest" ).autocomplete({
-        source: function( request, response ) {
-          $.ajax({
-            url: "http://localhost:4567/search",
-            dataType: "jsonp",
-            data: {
-              q: request.term
-            },
-            success: function( data ) {
-              response( data );
-            }
-          });
-        },
-        minLength: 3,
-        select: function( event, ui ) {
-          log( ui.item ?
-            "Selected: " + ui.item.label :
-            "Nothing selected, input was " + this.value);
-        },
-        open: function() {
-          $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-        },
-        close: function() {
-          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-        }
-      });
-    });
-*/
+		
 });
+
+function autocomplete(issues){	
+	var issuesAuto = [];
+	
+	for (var i = 0; i < issues.length; i++) {		
+		issuesAuto.push(issues[i].summary);
+	}		    
+	
+	    $( "#inputSearchAutosuggest" ).autocomplete({
+	      minLength: 0,
+	      source: issuesAuto,
+	      focus: function( event, ui ) {
+	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
+	        return false;	        
+	      },
+
+	      select: function( event, ui ) {
+	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
+	        einAusblendenDIV(4, 10);
+	        var inputSearch = $("#inputSearchAutosuggest");
+	    	var searchTxt = inputSearch[0].value;	
+	    	sendSearch(searchTxt);
+	        return false;
+	      }
+	    })
+
+	    .autocomplete( "instance" )._renderItem = function( ul, item ) {
+	      return $( "<li>" )
+	        .append( "<a>" + item.label)
+	        .appendTo( ul );
+	    };
+}
 
 function drawTable(data) {
     for (var i = 0; i < data.length; i++) {
