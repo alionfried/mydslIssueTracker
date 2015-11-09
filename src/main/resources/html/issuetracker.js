@@ -68,8 +68,7 @@ $("#btnCreateNewIssue").click(function () {
 	$.get( "http://localhost:4567/getPersonsFromDb", function( data ) {
 	    var n = 0;
 	    var personGet = false;
-		while(n < data.length && personGet == false){			
-			alert(actPerson.value);
+		while(n < data.length && personGet == false){						
 			if(data[n]._id.$oid == actPerson.value){				
 				personGet = true;
 				findPersonRole = data[n];
@@ -116,18 +115,8 @@ function alertNoPermission(){
 	alert("You don't have the permissions for this action.");
 }
 
-$('#btnChangeAssignee').click(function () {
-	var navRigth = $("#navRigth");
-	var personID = navRigth[0].text;
-	var btnName = "btnChangeAssignee";	
-    getReturn = (checkpermission(personID,btnName));
-    
-    if (getReturn == true) {
-        einAusblendenDIV(3, 1000);
-    }
-    else {
-        alertNoPermission();
-    }
+$('#btnChangeAssignee').click(function () {	
+        einAusblendenDIV(3, 1000);    
 });
 
 function sendJson(json, target){
@@ -173,8 +162,7 @@ function sendSearchSuggest(searchTxt){
 	    data:searchTxt,
 	    dataType: 'json',
 	    success: function(data){
-	        autocomplete(data);       
-
+	        autocomplete(data);
 	    },
 	    error: function(data){
 	        console.log("error");
@@ -219,10 +207,8 @@ function addPersons(){
 }
 
 $("body").on("submit", function(event){
-	//var targetInformations = event.target;
-	//var formData = $(this).serializeObject();
-    //console.log($('#formSubmit').serializeArray());		
-	
+		
+	//check if status is another
     var json = $('#formSubmit').serializeJSON();
     if(json.status != json.selectStatus){
     	alert("change status");
@@ -230,37 +216,17 @@ $("body").on("submit", function(event){
     }
     
     var jsonString2 = JSON.stringify(json);
-    //console.log(json);
-    
-	var navRigth = $("#navRigth");
-	var personID = navRigth[0].text;
-	var btnName = "btnChangeAssignee";	
-    getReturn = (checkpermission(personID,btnName));
-    //getReturn = false;
-    if (getReturn == true) {        
-	
-	alert( "Handler for .submit() called." );
-		
+                	
 	if(json._id == "null"){
 		alert('neuanlage');
 		sendJson(jsonString2,"submitIssue");
 		location.reload();
 	}
-	else{
-//		event.preventDefault();
-		//check if status is another		
-		
+	else{				
 		alert('update');
 		sendJson(jsonString2,"updateIssue");
 		location.reload();
-	}
-	
-        //noch zu bauen
-    }
-    else {
-    	event.preventDefault();
-        alertNoPermission();
-    }   	
+	}	        
 });
 
 //start js
@@ -302,32 +268,26 @@ function autocomplete(issues){
 	for (var i = 0; i < issues.length; i++) {
 		issuesAuto.push(issues[i].summary);
 	}
-//	console.log(issuesAuto);
-	$( "#inputSearchAutosuggest" ).autocomplete({
-		source:issuesAuto
-	});
-//		console.log("vor autosuggest");
-//	    $( "#inputSearchAutosuggest" ).autocomplete({
-//	      minLength: 0,
-//	      source: issuesAuto,
-//	      focus: function( event, ui ) {
-//	    	console.log("in focus");
-//	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
-//	        return false;	        
-//	      },
-//
-//	      select: function( event, ui ) {
-//	    	console.log("in select");
-//	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
-//	        findIssue();
-//	        return false;
-//	      }
-//	    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
-//	      console.log("render render render");
-//	      return $( "<li>" )
-//	        .append( "<a>" + item.label)
-//	        .appendTo( ul );
-//	    };
+
+		console.log("vor autosuggest");
+	    $( "#inputSearchAutosuggest" ).autocomplete({
+	      minLength: 0,
+	      source: issuesAuto,
+	      focus: function( event, ui ) {
+	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
+	        return false;	        
+	      },
+
+	      select: function( event, ui ) {
+	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
+	        findIssue();
+	        return false;
+	      }
+	    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+	      return $( "<li>" )
+	        .append( "<a>" + item.label)
+	        .appendTo( ul );
+	    };
 }
 
 function drawTable(data) {
