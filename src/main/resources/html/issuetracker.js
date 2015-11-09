@@ -68,11 +68,9 @@ $("#btnCreateNewIssue").click(function () {
 	$.get( "http://localhost:4567/getPersonsFromDb", function( data ) {
 	    var n = 0;
 	    var personGet = false;
-		while(n < data.length && personGet == false){
-			alert(data[n]._id.$oid);
+		while(n < data.length && personGet == false){			
 			alert(actPerson.value);
-			if(data[n]._id.$oid == actPerson.value){
-				alert("find");
+			if(data[n]._id.$oid == actPerson.value){				
 				personGet = true;
 				findPersonRole = data[n];
 			}
@@ -104,6 +102,13 @@ $("#btnCreateNewIssue").click(function () {
 	});	
          	
 });
+
+function findIssue(){
+	einAusblendenDIV(4, 10);
+    var inputSearch = $("#inputSearchAutosuggest");
+	var searchTxt = inputSearch[0].value;	
+	sendSearch(searchTxt);
+}
 
 function alertNoPermission(){
 	alert("You don't have the permissions for this action.");
@@ -161,16 +166,7 @@ $.ajax({
 }
 
 $('#btnSearchIssue').click(function () {
-	var navRigth = $("#navRigth");
-	var personID = navRigth[0].text;
-	var btnName = "btnChangeAssignee";	
-    getReturn = (checkpermission(personID,btnName));
-    //getReturn = false;
-    
-    einAusblendenDIV(4, 10);
-    var inputSearch = $("#inputSearchAutosuggest");
-	var searchTxt = inputSearch[0].value;	
-	sendSearch(searchTxt);  
+    findIssue();  
 });
 
 function addPersons(){
@@ -210,6 +206,11 @@ $("body").on("submit", function(event){
     //console.log($('#formSubmit').serializeArray());		
 	
     var json = $('#formSubmit').serializeJSON();
+    if(json.status != json.selectStatus){
+    	alert("change status");
+    	json.status = json.selectStatus;
+    }
+    
     var jsonString2 = JSON.stringify(json);
     //console.log(json);
     
@@ -229,7 +230,9 @@ $("body").on("submit", function(event){
 	}
 	else{
 //		event.preventDefault();
-		alert('update')
+		//check if status is another		
+		
+		alert('update');
 		sendJson(jsonString2,"updateIssue");
 		location.reload();
 	}
@@ -286,10 +289,7 @@ function autocomplete(issues){
 
 	      select: function( event, ui ) {
 	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
-	        einAusblendenDIV(4, 10);
-	        var inputSearch = $("#inputSearchAutosuggest");
-	    	var searchTxt = inputSearch[0].value;	
-	    	sendSearch(searchTxt);
+	        findIssue();
 	        return false;
 	      }
 	    })
@@ -337,7 +337,86 @@ function getSelectedItemIssueTypes(){
 		(loadIssueTypeStandard(selectedObject));		
 }
 
-function loadIssueType(div, data){	
+function loadIssueType(div, data){
+	
+	var findIssueInformation = data;
+	var allowedToChangeIssue = false;
+	var personFromDB;	
+	var role; //Rollen einer Person
+	var neededIssue; //issueType der betroffen ist
+	var neededWorkflow; //issueType Workflow
+	var neededTransistions = []; //issueType Transition
+	
+	var checkTransitions = [];
+	
+	var sOption = $("#optionChangeAssignee option");
+	var actPerson;
+	var findPersonRole;
+	var roleTransition = [];	
+	var findPerson = false;
+	var i = 0;
+	while(i < sOption.length && findPerson == false){
+		if(sOption[i].selected == true){
+			actPerson = sOption[i];
+			findperson = true;
+		}
+		i++;
+	}
+	
+	$.get( "http://localhost:4567/getPersonsFromDb", function( personData ) {
+	    var n = 0;
+	    var personGet = false;
+	    var a = findIssueInformation;
+		while(n < personData.length && personGet == false){						
+			if(personData[n]._id.$oid == actPerson.value){				
+				personGet = true;
+				findPersonRole = personData[n];
+			}
+			n++;
+		}
+		
+		var  tmprole = [];
+		for(var z = 0; z < findPersonRole.roles.length; z++){
+			tmprole.push(findPersonRole.roles[z]);							 
+		}
+		var tmpRoleTransition = [];
+		for(var y = 0; y < tmprole.length; y++){
+			for(var o = 0; o < tmprole[y].roleTransitions.length; o++){				
+				if(tmprole[y].roleTransitions[o].from == findIssueInformation.responseJSON.status){
+					alert(tmprole[y].roleTransitions[o].to);
+					roleTransition.push(tmprole[y].roleTransitions[o].to);
+					//allowedToChangeIssue = true;
+				}																			
+			}
+		}			
+	//});
+		
+	    $.get( "http://localhost:4567/getIssueTypesFromDb", function( dataTypes ) {
+	        var issueTypes = dataTypes;
+	        for (var i = 0; i < issueTypes.length; i++) {
+	        	if(issueTypes[i].issueType == findIssueInformation.responseJSON.issueType){
+	        		neededWorkflow = issueTypes[i].workflow;	        		
+	        	}	        		        	
+	        }
+	        for(var t = 0; t < neededWorkflow.workflowTransitions.length; t++){
+	        	if(neededWorkflow.workflowTransitions[t].from == findIssueInformation.responseJSON.status){
+	        		neededTransistions.push(neededWorkflow.workflowTransitions[t].to);
+	        	}	        	 
+	        }
+	        
+	        
+	        //Now check if there are permissions on both sides	        	        
+	        for(var i = 0; i < neededTransistions.length; i++){
+	        	for(var o = 0; o < roleTransition.length; o++){
+	        		if(neededTransistions[i] == roleTransition[o]){
+	        			checkTransitions.push(roleTransition[o]);
+	        			allowedToChangeIssue = true;
+	        		}
+	        	}
+	        }	
+	
+	if (allowedToChangeIssue == true) { 
+		
 	var tmpDiv = "individualInput.html #" + div;
 	var aFields = $.map(data.responseJSON, function(value, key) { return key } );
 	var aValues = $.map(data.responseJSON, function(value, key) { return value } );
@@ -347,7 +426,16 @@ function loadIssueType(div, data){
 
 			if(aFields[i] == '_id'){
 				document.getElementById('_id').value = aValues[i].$oid;
-			} else {
+			}else if(aFields[i] == 'selectStatus'){
+				for(var i = 0; i < checkTransitions.length; i++){
+					var x = document.createElement("OPTION");
+				    x.setAttribute("value", checkTransitions[i]);
+				    var t = document.createTextNode(checkTransitions[i]);
+				    x.appendChild(t);
+				    document.getElementById("selectStatus").appendChild(x);					
+				}				
+			}
+			else {
 				if(aFields[i] != '_id'){
 					document.getElementById(aFields[i]).value = aValues[i];	
 				}				
@@ -378,11 +466,16 @@ function loadIssueType(div, data){
 					}	
 				}
 			} 
-		}
-	});
+		}			
+	});	
+	}else {
+		einAusblendenDIV(1, 10);
+        alertNoPermission();
+    }
+	
+	    });
+	});	    		    
 }
-	
-	
 
 function loadIssueTypeStandard(div){
 	var tmpDiv = "individualInput.html #" + div;
