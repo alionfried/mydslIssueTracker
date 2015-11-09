@@ -173,13 +173,8 @@ function sendSearchSuggest(searchTxt){
 	    data:searchTxt,
 	    dataType: 'json',
 	    success: function(data){
-	        console.log("data:" + data); 
 	        autocomplete(data);       
 
-	    },
-	    complete: function(data){
-	        console.log("JSON Load OK");
-	        autocomplete(data);       
 	    },
 	    error: function(data){
 	        console.log("error");
@@ -286,7 +281,7 @@ $(function () {
     
 	$.get( "http://localhost:4567/getLatestIssues", function( data ){
 		var issues = data;
-		console.log(data);
+//		console.log(data);
 		drawTable(issues);
 		//autocomplete(issues);		
 	});
@@ -296,6 +291,7 @@ $(function () {
 });
 
 $('#inputSearchAutosuggest').on('input', function() { 
+//	console.log("change");
 	sendSearchSuggest($(this).val()); // get the current value of the input field.
 });
 
@@ -305,28 +301,33 @@ function autocomplete(issues){
 	
 	for (var i = 0; i < issues.length; i++) {
 		issuesAuto.push(issues[i].summary);
-	}		    
-	
-	    $( "#inputSearchAutosuggest" ).autocomplete({
-	      minLength: 0,
-	      source: issuesAuto,
-	      focus: function( event, ui ) {
-	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
-	        return false;	        
-	      },
-
-	      select: function( event, ui ) {
-	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
-	        findIssue();
-	        return false;
-	      }
-	    })
-
-	    .autocomplete( "instance" )._renderItem = function( ul, item ) {
-	      return $( "<li>" )
-	        .append( "<a>" + item.label)
-	        .appendTo( ul );
-	    };
+	}
+//	console.log(issuesAuto);
+	$( "#inputSearchAutosuggest" ).autocomplete({
+		source:issuesAuto
+	});
+//		console.log("vor autosuggest");
+//	    $( "#inputSearchAutosuggest" ).autocomplete({
+//	      minLength: 0,
+//	      source: issuesAuto,
+//	      focus: function( event, ui ) {
+//	    	console.log("in focus");
+//	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
+//	        return false;	        
+//	      },
+//
+//	      select: function( event, ui ) {
+//	    	console.log("in select");
+//	        $( "#inputSearchAutosuggest" ).val( ui.item.label );
+//	        findIssue();
+//	        return false;
+//	      }
+//	    }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+//	      console.log("render render render");
+//	      return $( "<li>" )
+//	        .append( "<a>" + item.label)
+//	        .appendTo( ul );
+//	    };
 }
 
 function drawTable(data) {
