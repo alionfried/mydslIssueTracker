@@ -86,6 +86,10 @@ PersonField assignee as 'Bearbeiter' {
 	default L000043
 }
 
+StringField description as 'Beschreibung'{
+	
+}
+
 Role tester {
 	zuTesten_abgenommen
 	zuTesten_abgeschlossen
@@ -147,10 +151,10 @@ IssueScreen issueScreen {
 	StatusField statusField {
 		default offen
 	}
-
-	SummaryField beschreibung {
+	SummaryField Zusammenfassung {
 	}
 	createDate
 	beginnDatum
 	assignee
+	description
 }
