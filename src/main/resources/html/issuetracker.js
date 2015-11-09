@@ -79,7 +79,9 @@ $("#btnCreateNewIssue").click(function () {
 		
 		var permissionForCreateIssue = false;
 		for(var z = 0; z < findPersonRole.roles.length; z++){
-			if(findPersonRole.roles[z].openIssue == true){
+			if(findPersonRole.roles[z].openIssue != true){
+				permissionForCreateIssue = false;
+			}else{
 				permissionForCreateIssue = true;
 			}				
 		}
@@ -162,6 +164,27 @@ $.ajax({
         console.log("error");
     }
 });
+}
+
+function sendSearchSuggest(searchTxt){
+	$.ajax({
+	    type:"POST",
+	    url: "http://localhost:4567/searchSuggest",
+	    data:searchTxt,
+	    dataType: 'json',
+	    success: function(data){
+	        console.log("data:" + data); 
+	        autocomplete(data);       
+
+	    },
+	    complete: function(data){
+	        console.log("JSON Load OK");
+	        autocomplete(data);       
+	    },
+	    error: function(data){
+	        console.log("error");
+	    }
+	});
 
 }
 
@@ -265,17 +288,22 @@ $(function () {
 		var issues = data;
 		console.log(data);
 		drawTable(issues);
-		autocomplete(issues);		
+		//autocomplete(issues);		
 	});
 
 	addPersons();	 
 		
 });
 
+$('#inputSearchAutosuggest').on('input', function() { 
+	sendSearchSuggest($(this).val()); // get the current value of the input field.
+});
+
+
 function autocomplete(issues){	
 	var issuesAuto = [];
 	
-	for (var i = 0; i < issues.length; i++) {		
+	for (var i = 0; i < issues.length; i++) {
 		issuesAuto.push(issues[i].summary);
 	}		    
 	
