@@ -105,7 +105,7 @@ $("#btnCreateNewIssue").click(function () {
 });
 
 function findIssue(){
-	einAusblendenDIV(4, 10);
+	einAusblendenDIV(5, 10);
     var inputSearch = $("#inputSearchAutosuggest");
 	var searchTxt = inputSearch[0].value;	
 	sendSearch(searchTxt);
@@ -210,8 +210,7 @@ $("body").on("submit", function(event){
 		
 	//check if status is another
     var json = $('#formSubmit').serializeJSON();
-    if(json.status != json.selectStatus){
-    	alert("change status");
+    if(json.status != json.selectStatus){    	
     	json.status = json.selectStatus;
     }
     
@@ -327,7 +326,6 @@ function getSelectedItemIssueTypes(){
 }
 
 function loadIssueType(div, data){
-	
 	var findIssueInformation = data;
 	var allowedToChangeIssue = false;
 	var personFromDB;	
@@ -371,14 +369,11 @@ function loadIssueType(div, data){
 		var tmpRoleTransition = [];
 		for(var y = 0; y < tmprole.length; y++){
 			for(var o = 0; o < tmprole[y].roleTransitions.length; o++){				
-				if(tmprole[y].roleTransitions[o].from == findIssueInformation.responseJSON.status){
-					alert(tmprole[y].roleTransitions[o].to);
+				if(tmprole[y].roleTransitions[o].from == findIssueInformation.responseJSON.status){					
 					roleTransition.push(tmprole[y].roleTransitions[o].to);
-					//allowedToChangeIssue = true;
 				}																			
 			}
 		}			
-	//});
 		
 	    $.get( "http://localhost:4567/getIssueTypesFromDb", function( dataTypes ) {
 	        var issueTypes = dataTypes;
@@ -392,8 +387,7 @@ function loadIssueType(div, data){
 	        		neededTransistions.push(neededWorkflow.workflowTransitions[t].to);
 	        	}	        	 
 	        }
-	        
-	        
+	        	        
 	        //Now check if there are permissions on both sides	        	        
 	        for(var i = 0; i < neededTransistions.length; i++){
 	        	for(var o = 0; o < roleTransition.length; o++){
@@ -405,7 +399,7 @@ function loadIssueType(div, data){
 	        }	
 	
 	if (allowedToChangeIssue == true) { 
-		
+	einAusblendenDIV(4, 10);	
 	var tmpDiv = "individualInput.html #" + div;
 	var aFields = $.map(data.responseJSON, function(value, key) { return key } );
 	var aValues = $.map(data.responseJSON, function(value, key) { return value } );
@@ -416,6 +410,12 @@ function loadIssueType(div, data){
 			if(aFields[i] == '_id'){
 				document.getElementById('_id').value = aValues[i].$oid;
 			}else if(aFields[i] == 'selectStatus'){
+				document.getElementById("selectStatus").remove(0);				
+				var xy = document.createElement("OPTION");
+			    xy.setAttribute("value", findIssueInformation.responseJSON.status);
+			    var ty = document.createTextNode(findIssueInformation.responseJSON.status);
+			    xy.appendChild(ty);
+			    document.getElementById("selectStatus").appendChild(xy);
 				for(var i = 0; i < checkTransitions.length; i++){
 					var x = document.createElement("OPTION");
 				    x.setAttribute("value", checkTransitions[i]);
@@ -460,8 +460,7 @@ function loadIssueType(div, data){
 	}else {
 		einAusblendenDIV(1, 10);
         alertNoPermission();
-    }
-	
+    }	
 	    });
 	});	    		    
 }
