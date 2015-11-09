@@ -3,7 +3,7 @@
 // 2 := optionCreateNewIssue
 // 3 := btnChangeAssignee
 // 4 := btnSearch
-// 5 := autocomplete
+// 5 := alertSearch
 
 var aDiv = [
   ['mainDiv'             , true, true, true, false, false],
@@ -24,39 +24,31 @@ function einAusblendenDIV(nStatus, nTime) {
     }
 }
 
-//Hier muss mit der Datenbank gearbeitet werden
-function checkpermission(personID,btnName) {
-    //String Name der Person erhalten und dann über Datenbank abfragen, ob die Aktion durchgeführt werden darf
-    
-    //PersonID is null, when there is no person in db, so permission check doesn't work
-    if(personID == "null"){
-    	return true;
-    }
-    
-    return true;
-}
-
-$('#btnSelectChangeAssignee').change(function(){
-    //var sReturn = this.options(this.selectedIndex).value;
+//change Assignee
+$('#btnSelectChangeAssignee').change(function(){  
 	var sReturn = this.options[this.selectedIndex].text;
     $("#navRigth").text(sReturn);
 });
 
+//Change IssueType
 $('#btnListCreateIssues').change(function(){
     var sReturn = this.options[this.selectedIndex].value;    
     (loadIssueTypeStandard(sReturn));
 });
 
+//issueTracker
 $("#aShow").click(function () {
     einAusblendenDIV(1, 1000);
 });
 
+//Create New Issue
 $("#btnCreateNewIssue").click(function () {
 	var sOption = $("#optionChangeAssignee option");
 	var actPerson;
 	var findPersonRole;
 	var findPerson = false;
 	var i = 0;
+	//Get person who wants to create
 	while(i < sOption.length && findPerson == false){
 		if(sOption[i].selected == true){
 			actPerson = sOption[i];
@@ -65,6 +57,7 @@ $("#btnCreateNewIssue").click(function () {
 		i++;
 	}
 	
+	//Get Persons
 	$.get( "http://localhost:4567/getPersonsFromDb", function( data ) {
 	    var n = 0;
 	    var personGet = false;
@@ -76,6 +69,7 @@ $("#btnCreateNewIssue").click(function () {
 			n++;
 		}		
 		
+		//Check if he is allowed to create
 		var permissionForCreateIssue = false;
 		for(var z = 0; z < findPersonRole.roles.length; z++){
 			if(findPersonRole.roles[z].openIssue != true){
@@ -104,6 +98,7 @@ $("#btnCreateNewIssue").click(function () {
          	
 });
 
+//Search an Issue
 function findIssue(){
 	einAusblendenDIV(5, 10);
     var inputSearch = $("#inputSearchAutosuggest");
@@ -130,8 +125,7 @@ $.ajax
         //json object to sent to the authentication url
         data: json,
         success: function () {
-
-        alert("Thanks!"); 
+         
         }
     })
 }
@@ -142,15 +136,12 @@ $.ajax({
     url: "http://localhost:4567/search",
     data:searchTxt,
     dataType: 'json',
-    success: function(data){
-        console.log("data:" + data.issueType);        
+    success: function(data){            
     },
-    complete: function(data){
-        console.log("JSON Load OK");
+    complete: function(data){        
         loadIssueType(data.responseJSON.issueType, data);        
     },
-    error: function(data){
-        console.log("error");
+    error: function(data){        
     }
 });
 }
@@ -165,18 +156,16 @@ function sendSearchSuggest(searchTxt){
 	        autocomplete(data);
 	    },
 	    error: function(data){
-	        console.log("error");
 	    }
 	});
-
 }
 
 $('#btnSearchIssue').click(function () {
     findIssue();  
 });
 
-function addPersons(){
-	//add persons    
+//add Person to selectBox
+function addPersons(){    
     $.get( "http://localhost:4567/getPersonsFromDb", function( data ) {
     var persons = data;
     for (var i = 0; i < persons.length; i++) {
@@ -199,7 +188,6 @@ function addPersons(){
         }
         i++;
     }
-    //selectedObject = returnObjekt.value;
     selectedObject = returnObjekt.text;
 
     $("#navRigth").text(selectedObject);
@@ -215,14 +203,13 @@ $("body").on("submit", function(event){
     }
     
     var jsonString2 = JSON.stringify(json);
-                	
-	if(json._id == "null"){
-		alert('neuanlage');
+    
+    //make dission for insert or update
+	if(json._id == "null"){		
 		sendJson(jsonString2,"submitIssue");
 		location.reload();
 	}
-	else{				
-		alert('update');
+	else{						
 		sendJson(jsonString2,"updateIssue");
 		location.reload();
 	}	        
@@ -239,16 +226,14 @@ $(function () {
     	var issueType = issueTypes[i].issueType;
     	var myOpt = '<option value=' + issueType + ' >' + issueType + '</option>';    	
 		$("#btnListCreateIssues").append(myOpt);	
-    }
-    
+    }    
    		var lReturn = getSelectedItemIssueTypes();           
     });
     
+    //fill table with latest 10 issues
 	$.get( "http://localhost:4567/getLatestIssues", function( data ){
 		var issues = data;
-//		console.log(data);
-		drawTable(issues);
-		//autocomplete(issues);		
+		drawTable(issues);			
 	});
 
 	addPersons();	 
@@ -256,7 +241,6 @@ $(function () {
 });
 
 $('#inputSearchAutosuggest').on('input', function() { 
-//	console.log("change");
 	sendSearchSuggest($(this).val()); // get the current value of the input field.
 });
 
@@ -267,8 +251,6 @@ function autocomplete(issues){
 	for (var i = 0; i < issues.length; i++) {
 		issuesAuto.push(issues[i].summary);
 	}
-
-		console.log("vor autosuggest");
 	    $( "#inputSearchAutosuggest" ).autocomplete({
 	      minLength: 0,
 	      source: issuesAuto,
@@ -297,7 +279,7 @@ function drawTable(data) {
 
 function drawRow(rowData) {
     var row = $("<tr />")
-    $("#personDataTable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+    $("#personDataTable").append(row);
     row.append($("<td>" + rowData._id.$oid + "</td>"));
     row.append($("<td>" + rowData.issueType + "</td>"));
     row.append($("<td>" + rowData.status + "</td>"));
@@ -345,15 +327,15 @@ function loadIssueType(div, data){
 	while(i < sOption.length && findPerson == false){
 		if(sOption[i].selected == true){
 			actPerson = sOption[i];
-			findperson = true;
+			findPerson = true;
 		}
 		i++;
 	}
 	
+	//Get Transition from Person
 	$.get( "http://localhost:4567/getPersonsFromDb", function( personData ) {
 	    var n = 0;
-	    var personGet = false;
-	    var a = findIssueInformation;
+	    var personGet = false;	    
 		while(n < personData.length && personGet == false){						
 			if(personData[n]._id.$oid == actPerson.value){				
 				personGet = true;
@@ -375,6 +357,7 @@ function loadIssueType(div, data){
 			}
 		}			
 		
+		//Get possible Transition from IssueType
 	    $.get( "http://localhost:4567/getIssueTypesFromDb", function( dataTypes ) {
 	        var issueTypes = dataTypes;
 	        for (var i = 0; i < issueTypes.length; i++) {
@@ -430,7 +413,7 @@ function loadIssueType(div, data){
 				}				
 			}
 			
-			//JSON-ID sichern
+			//JSON-ID save
 			if(aFields[i] == '_id'){ 
 				document.getElementById('_id').value = aValues[i].$oid;
 			}else {
